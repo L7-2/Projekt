@@ -2,11 +2,14 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Ankiety on-line</title>
+		<title>Ankiety Online</title>
 	</head>
 	<body>
-		<?php
-                
-                ?>
+            <!-- Utworzenie formularza logowania -->
+            <form action="logowanie.php" method="post">
+                Login: <br/> <input type="text" name="login"/><br/>
+                Hasło: <br/> <input type="password" name="haslo"/><br/>
+                <input type="submit" value="Zaloguj się"/>
+            </form>
 	</body>
 </html>
