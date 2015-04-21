@@ -1,5 +1,7 @@
 <?php
-$polaczenie = @new mysqli($host, $db_user, $db_password, $db_name); // Ustawienie połączenia z bazą
+include "connect.php";
+mysql_connect("$host","$db_user","$db_password");
+mysql_select_db("$db_name");
  
 function filtruj($zmienna)
 {
@@ -18,12 +20,13 @@ if (isset($_POST['rejestruj']))
 	$email = filtruj($_POST['email']);
 	 
 	// sprawdzamy czy login nie jest już w bazie
-	if (mysql_num_rows(mysql_query("SELECT Login FROM Uzytkownicy WHERE Login = '".$login."';")) == 0)
-	{
+	if (mysql_num_rows(mysql_query("SELECT Login FROM uzytkownicy WHERE Login = '".$login."';")) == 0)
+
+        {
 		if ($haslo1 == $haslo2) // sprawdzamy czy hasła takie same
 		{
-			mysql_query("INSERT INTO `Uzytkownicy` (`Login`, `Haslo`, `Adres_email`, `Data_zalozenia_konta`)
-				VALUES ('".$login."', '".($haslo1)."', '".$email."', '".time()."');");
+			mysql_query("INSERT INTO `uzytkownicy` (`Login`, `Haslo`, `Adres_email`, `Data_zalozenia_konta`)
+				VALUES ('".$login."', '".($haslo1)."', '".$email."', '".date("Y-m-d")."');");
  
 			echo "Konto zostało utworzone!";
 		}

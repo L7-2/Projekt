@@ -29,8 +29,8 @@ if(isset($_SESSION['zalogowany'])&&($_SESSION['zalogowany']==true))
 			</form>
 			
 <?php
-if(isset($_SESSION['blad']))
-echo $_SESSION['blad'];
+if(isset($_SESSION['blad'])) echo $_SESSION['blad'];
+if(isset($_SESSION['zablokowany'])) echo $_SESSION['zablokowany'];
 ?>
 	</body>
 </html>
