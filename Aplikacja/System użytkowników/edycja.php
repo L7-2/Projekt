@@ -11,7 +11,7 @@ mysql_select_db("$db_name");
 		<title>Ankiety Online</title>
 	</head>
         <body>
-            <form method="POST" action="edycja2.php">
+            <form method="POST" action="edycja_form.php">
                  Imie: <br/> <input type="text" name="imie"/><br/>
                  Nazwisko: <br/> <input type="text" name="nazwisko"/><br/>
                  <input type="submit" value="Zmień">
