@@ -20,7 +20,7 @@ if(!isset($_SESSION['zalogowany']))
          <input type="submit" value="Usuń Konto">
         </form>
             <br/>
-            <form action="edycja.php">
+            <form action="edycja_form.php">
          <input type="submit" value="Edytuj Konto">
         </form>
 	</body>
