@@ -24,7 +24,13 @@ mysql_select_db("$db_name");
                  <br/>
                  Data urodzenia (0000-00-00): <br/> <input name="data_ur" type="date"<br/><br/>
                  Miejsce zamieszkania: <br/> <input type="text" name="miejsce_zam"/><br/>
-                 <input type="submit" value="Zmień">                
+                 Hasło: <br/> <input type="password" name="haslo"/><br/>
+                 <input type="submit" value="Zmień">   
+                 <br/>
+                 <?php
+                 if(isset($_SESSION['blad_dane'])){ echo $_SESSION['blad_dane'];
+                unset($_SESSION['blad_dane']);}
+                ?>
             </form>
         </body>
 </html>

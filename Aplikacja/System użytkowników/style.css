@@ -1,0 +1,53 @@
+﻿#pojemnik
+{
+	width: 900px;
+	border-style: solid;
+    border-width: 1px;
+	margin-left: auto;
+    margin-right: auto
+}
+
+#logo
+{
+	height: 180px;
+	width: 898px;
+	border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+
+#menu
+{
+	float: left;
+	width: 100px;
+	border-right-style: solid;
+    border-width: 1px;
+}
+
+#tresc
+{
+	text-align: center;
+	float: left;
+	width: 600px;
+}
+
+#uzytkownik
+{
+	text-align: center;
+	float: left;
+	width: 194px;
+	border-style: solid;
+    border-width: 1px;
+}
+
+#stopka
+{
+	clear:both;
+	text-align: center;
+	border-style: solid;
+    border-width: 1px;
+}
+
+#tekst
+{
+	color: red;
+}

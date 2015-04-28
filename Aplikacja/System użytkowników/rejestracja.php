@@ -23,7 +23,7 @@ if (isset($_POST['rejestruj']))
 	if (mysql_num_rows(mysql_query("SELECT Login FROM uzytkownicy WHERE Login = '".$login."';")) == 0)
 
         {
-		if ($haslo1 == $haslo2) // sprawdzamy czy hasła takie same
+		if ($haslo1 == $haslo2 && $login != null && $haslo1 != null && $email != null) // sprawdzamy czy hasła takie same
 		{
 			mysql_query("INSERT INTO `uzytkownicy` (`Login`, `Haslo`, `Adres_email`, `Data_zalozenia_konta`)
 				VALUES ('".$login."', '".($haslo1)."', '".$email."', '".date("Y-m-d")."');");
