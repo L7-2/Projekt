@@ -19,11 +19,10 @@ if(isset($_SESSION['zalogowany'])&&($_SESSION['zalogowany']==true))
 		<center><img src="obrazki/ankieta.png" width="1000" height="200" /></center>
 		</div>
 		<div id = menu>
-			<a href="index.php">
-			<div class="option">Strona główna</div></a>
 			<a href="rejestracja_form.php">
 			<div class="option">Zarejestruj się</div></a>
 			<div class="option">Kontakt</div>
+			<div class="option">O serwisie</div>
 			<div id = "uzytkownik">
 			<!-- Utworzenie formularza logowania -->
             <form action="logowanie.php" method="post">
@@ -42,7 +41,7 @@ if(isset($_SESSION['zalogowany'])&&($_SESSION['zalogowany']==true))
 			</div>
 		<div id="topbar">
 			<div id="topbarL">
-				<img src="obrazki/zdj.png" width="150" height="124"/>
+				<img src="zdj.png" width="150" height="124"/>
 			</div>
 			<div id="topbarR">
 				<span class="bigtitle">Ankiety Online</span>
@@ -54,17 +53,17 @@ if(isset($_SESSION['zalogowany'])&&($_SESSION['zalogowany']==true))
 		</div>
 		
 		<div id="sidebar">
-			<div class="optionL" style="color: #000000">O serwisie</div>
+			<a href="index.php">
+			<div class="optionL" style="color: #000000">Strona główna</div></a>
+			<div class="optionL" style="color: #000000">Ankiety</div>
+			<div class="optionL" style="color: #000000">Edytuj dane</div>
 		</div>
 		
 		<div id="content">
 			<span class="bigtitle">Dlaczego powinieneś wybrać akurat nas</span>
 			
 			<div class="dottedline"></div>
-				<?php
-				if(isset($_SESSION['zarejestrowany'])) {echo $_SESSION['zarejestrowany'];
-				unset($_SESSION['zarejestrowany']);}
-				?>
+				Treść strony
 			</div>	
 		
 		<div id="footer">

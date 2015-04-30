@@ -3,6 +3,11 @@ session_start();
 include "connect.php";
 mysql_connect("$host","$db_user","$db_password");
 mysql_select_db("$db_name");
+if(isset($_SESSION['zalogowany'])&&($_SESSION['zalogowany']==true))
+{
+	header('Location: menu.php');
+	exit();
+}
 ?>
 <!doctype html>
 <html>
@@ -17,10 +22,11 @@ mysql_select_db("$db_name");
 		<center><img src="obrazki/ankieta.png" width="1000" height="200" /></center>
 		</div>
 		<div id = menu>
+			<a href="index.php">
+			<div class="option">Strona główna</div></a>
 			<a href="rejestracja_form.php">
 			<div class="option">Zarejestruj się</div></a>
 			<div class="option">Kontakt</div>
-			<div class="option">O serwisie</div>
 			<div id = "uzytkownik">
 			<!-- Utworzenie formularza logowania -->
             <form action="logowanie.php" method="post">
@@ -51,10 +57,7 @@ mysql_select_db("$db_name");
 		</div>
 		
 		<div id="sidebar">
-			<a href="index.php">
-			<div class="optionL" style="color: #000000">Strona główna</div></a>
-			<div class="optionL" style="color: #000000">Ankiety</div>
-			<div class="optionL" style="color: #000000">Edytuj dane</div>
+			<div class="optionL" style="color: #000000">O serwisie</div>
 		</div>
 		
 		<div id="content">
@@ -69,6 +72,12 @@ mysql_select_db("$db_name");
                 <b>Email:</b> <input type="text" name="email" style="margin-left: 9.5%;"><br>
                 <input type="submit" value="Utwórz konto" name="rejestruj">
                 </form>
+				<?php
+				if(isset($_SESSION['zlehaslo'])) {echo $_SESSION['zlehaslo'];
+				unset($_SESSION['zlehaslo']);}
+				if(isset($_SESSION['zajetylogin'])) {echo $_SESSION['zajetylogin'];
+				unset($_SESSION['zajetylogin']);}
+				?>
 				</div>
 			</div>	
 			</div>	
