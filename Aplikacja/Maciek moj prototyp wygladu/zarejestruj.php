@@ -69,16 +69,70 @@
       <!-- Username -->
       <label class="control-label"  for="login">Nazwa</label>
       <div class="controls">
-        <input type="text" id="login" name="login" placeholder="" class="input-xlarge">
+        <input type="text" id="login" name="login" placeholder="login" class="input-xlarge">
         
       </div>
     </div>
  
+ 
+  <div class="control-group">
+      <!-- Imie -->
+      <label class="control-label"  for="Imie">Imie</label>
+      <div class="controls">
+        <input type="text" id="Imie" name="Imie" placeholder="Imie" class="input-xlarge">
+        
+      </div>
+    </div>
+	
+	<div class="control-group">
+      <!-- naziwskoe -->
+      <label class="control-label"  for="login">Nazwisko</label>
+      <div class="controls">
+        <input type="text" id="Nazwisko" name="Nazwisko" placeholder="Nazwisko" class="input-xlarge">
+        
+      </div>
+    </div>
+	
+	<div class="control-group">
+      <!-- E-mail -->
+      <label class="control-label" for="email">Plec</label>
+      <div class="controls">
+       <select>
+  <option type ="text" value="Kobieta" id="Plec" name="Plec">Kobieta</option>
+ <option type ="text" value="Kobieta" id="Plec" name="Plec">Mezczyzna</option>
+ <!-- jak pobrac z tego dane?????????????????? -->
+</select>
+        
+      </div>
+    </div>
+	
+	
+		<div class="control-group">
+      <!-- naziwskoe -->
+      <label class="control-label"  for="login">Data urodzenia</label>
+      <div class="controls">
+        	<input type="date" name="bday">
+        
+		</div>
+    </div>
+	
+<div class="control-group">
+      <!-- Miejsce zamieszkania -->
+      <label class="control-label"  for="login">Miejsce zamieszkania</label>
+      <div class="controls">
+        <input type="text" id="Miejsce zamieszkania" name="Miejsce zamieszkania" placeholder="Miejsce zamieszkania" class="input-xlarge">
+        
+      </div>
+    </div>
+	
+	
+	
+	
     <div class="control-group">
       <!-- E-mail -->
       <label class="control-label" for="email">E-mail</label>
       <div class="controls">
-        <input type="text" id="email" name="email" placeholder="" class="input-xlarge">
+        <input type="text" id="email" name="email" placeholder="Adres e-mail" class="input-xlarge">
         
       </div>
     </div>
@@ -106,7 +160,9 @@
       <div class="controls">
 	  <br>
 	  <input type="submit"   class="btn btn-success" value="Rejestruj" name="rejestruj">
-        
+	  <br></br>
+	    
+        <a href="index.php" class="btn btn-success" >Powrot</a>
       </div>
     </div>
   </fieldset>
@@ -129,6 +185,7 @@ function filtruj($zmienna)
 if (isset($_POST['rejestruj']))
 {
 	$login = filtruj($_POST['login']);
+	$imie = filtruj($_POST['imie']);
 	$haslo1 = filtruj($_POST['haslo1']);
 	$haslo2 = filtruj($_POST['haslo2']);
 	$email = filtruj($_POST['email']);

@@ -57,24 +57,22 @@
 
 <!-- Logowanie -->
 
-<div class="register-form">
-<h1>Logowanie</h1>
-<form action="" method="POST">
-    <p><label>User Name : </label>
-	<input id="username" type="text" name="username" placeholder="username" /></p>
-
-     <p><label>Password&nbsp;&nbsp; : </label>
-	 <input id="password" type="password" name="password" placeholder="password" /></p>
+<?php
+session_start();
+mysql_connect("localhost","root","");
+mysql_select_db("mydb");
+?>
  
-    <a class="btn" href="zarejestruj.php">Rejestracja</a>
-    <input class="btn register" type="submit" name="submit" value="Zaloguj" />
-    </form>
-</div>
+<form method="POST" action="logowanie.php">
+<b>Login:</b> <input type="text" name="login"><br>
+<b>Hasło:</b> <input type="password" name="haslo"><br>
+<input type="submit" value="Zaloguj" name="loguj">
+</form>
 
 <!-- Hero Area Section End-->
 
 
 
-
-    </body>
+ </body>
     </html>
+   

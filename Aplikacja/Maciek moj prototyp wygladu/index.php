@@ -82,7 +82,7 @@
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
        
 		 <a href="zarejestruj.php" class="btn btn-primary btn-lg">Zarejestruj</a>
-       <a href="zaloguj.php" class="btn btn-primary btn-lg">Zaloguj</a>
+       <a href="login.php" class="btn btn-primary btn-lg">Zaloguj</a>
         </div>
 
 </div>
