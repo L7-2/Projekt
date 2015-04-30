@@ -1,53 +1,164 @@
-﻿#pojemnik
+body
 {
-	width: 900px;
-	border-style: solid;
-    border-width: 1px;
+	background-color: #404040;
+	font-family: 'Lato', sans-serif;
+}
+
+#container
+{
+	width: 1000px;
 	margin-left: auto;
-    margin-right: auto
+	margin-right: auto;
 }
 
 #logo
 {
-	height: 180px;
-	width: 898px;
-	border-bottom-style: solid;
-    border-bottom-width: 1px;
+	color: white;
+	margin-top: 20px;
+	font-size: 44px;
+	letter-spacing: 3px;
+	font-weight: 900;
 }
 
 #menu
 {
-	float: left;
-	width: 100px;
-	border-right-style: solid;
-    border-width: 1px;
+	background-color: #303030;
+	margin-top: 20px;
+	color: #ffffff;
+	padding: 10px;
+	
 }
 
-#tresc
+#topbar
 {
+	background-color: #128870;
+	color: white;
+	padding: 10px;
+	margin-top: 20px;
+	margin-bottom: 25px;
+	height: 170px;
+}
+
+#topbarL
+{
+	float:left;
+	padding: 20px;
+	width: 138px;
 	text-align: center;
+	border-right: 2px dotted #cccccc;
+}
+
+#topbarR
+{
 	float: left;
-	width: 600px;
+	padding: 20px;
+	width: 760px;
+	font-size: 16px;
+	text-align: justify;
+}
+
+#sidebar
+{
+	float: left;
+	width: 148px;
+	min-height: 620px;
+	padding:20px;
+	background-color: lightgray;
+	text-align: center;
+	font-size: 18px;
+	border-right: 2px dotted #666666;
+}
+
+#content
+{
+	float: left;
+	padding: 40px;
+	width: 730px;
+	background-color: #dedede;
+	min-height: 580px;
+	text-align: justify;
+}
+
+#footer
+{
+	clear: both;
+	color: white;
+	text-align: center;
+	padding: 20px;
+	font-size: 18px;
 }
 
 #uzytkownik
 {
-	text-align: center;
+	text-align: center ;
+	margin-top: 1%;
+	margin-left: auto ;
+	margin-right: auto ;
+}
+
+
+
+.option
+{
 	float: left;
-	width: 194px;
-	border-style: solid;
-    border-width: 1px;
+	min-width: 50px;
+	height: 25px;
+	font-size: 18px;
+	padding: 10px;
+	border-right: 2px dotted #444444;
+	opacity: 0.8;
 }
 
-#stopka
+.option:hover
 {
-	clear:both;
-	text-align: center;
-	border-style: solid;
-    border-width: 1px;
+	background-color: #000000;
+	cursor: pointer;
 }
 
-#tekst
+.optionL
 {
-	color: red;
+	font-size:18px;
+	height:25px;
+	padding: 10px;
+	border-bottom: 2px dotted #444444;
+}
+
+.optionL:hover
+{
+	background-color: #f36742;
+	color: white;
+	cursor: pointer;
+}
+
+.bigtitle
+{
+	font-size: 25px;
+	font-weight: 900;
+	letter-spacing: 1px;
+}
+
+.dottedline
+{
+	height: 5px;
+	margin-top: 15px;
+	margin-bottom: 20px;
+	border-bottom: 2px dotted #444444;
+}
+
+a:link
+{
+color:white;
+text-decoration: none;
+}
+
+a:visited
+{
+color:white;
+text-decoration: none;
+}
+
+a:hover
+{
+color:red
+text-decoration: none;
 }

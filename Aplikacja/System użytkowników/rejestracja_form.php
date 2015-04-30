@@ -12,32 +12,70 @@ mysql_select_db("$db_name");
 		<link rel="stylesheet" href="style.css" type="text/css"/>
 	</head>
         <body>
-		<div id = pojemnik>
+			<div id = container>
 		<div id = logo>
-		<img src="obrazki/ankieta.png" width="897" height="179" />
+		<center><img src="obrazki/ankieta.png" width="1000" height="200" /></center>
 		</div>
 		<div id = menu>
-		sdad
-		</div>
-		<div id = tresc>
-			Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym. Został po raz pierwszy użyty w XV w. przez nieznanego drukarza do wypełnienia tekstem próbnej książki. Pięć wieków później zaczął być używany przemyśle elektronicznym, pozostając praktycznie niezmienionym. Spopularyzował się w latach 60. XX w. wraz z publikacją arkuszy Letrasetu, zawierających fragmenty Lorem Ipsum, a ostatnio z zawierającym różne wersje Lorem Ipsum oprogramowaniem przeznaczonym do realizacji druków na komputerach osobistych, jak Aldus PageMaker
-		</div>
-		<div id = uzytkownik>
-                <form method="POST" action="rejestracja.php">
-                <b>Login:</b> <input type="text" name="login"><br>
-                <b>Hasło:</b> <input type="password" name="haslo1"><br>
-                <b>Powtórz hasło:</b> <input type="password" name="haslo2"><br>
-                <b>Email:</b> <input type="text" name="email"><br>
-                <input type="submit" value="Utwórz konto" name="rejestruj">
-                </form>
-		</div>
-		<div id = stopka>
-			<div id = tekst>
-			Ankiety On-Line
+			<a href="rejestracja_form.php">
+			<div class="option">Zarejestruj się</div></a>
+			<div class="option">Kontakt</div>
+			<div class="option">O serwisie</div>
+			<div id = "uzytkownik">
+			<!-- Utworzenie formularza logowania -->
+            <form action="logowanie.php" method="post">
+                Login: <input type="text" name="login"/>
+                &nbsp;&nbsp;&nbsp;Hasło: <input type="password" name="haslo"/>
+                &nbsp;&nbsp;<input type="submit" value="Zaloguj się"/>
+            </form>
+			<?php
+			if(isset($_SESSION['blad'])){ echo $_SESSION['blad'];
+			unset($_SESSION['blad']);}
+			if(isset($_SESSION['zablokowany'])) {echo $_SESSION['zablokowany'];
+			unset($_SESSION['zablokowany']);}
+			?>
 			</div>
+			<div style="clear:both;"></div>
+			</div>
+		<div id="topbar">
+			<div id="topbarL">
+				<img src="obrazki/zdj.png" width="150" height="124"/>
+			</div>
+			<div id="topbarR">
+				<span class="bigtitle">Ankiety Online</span>
+				<div style="height: 15px;"></div>
+				Serwis ankietyprz.pl został stworzony, aby w prosty sposób tworzyć ankiety internetowe o zaawansowanej funkcjonalności oraz zbierać, analizować i eksportować wyniki zebrane od respondentów. 
+				Zapraszamy do testowania konta demo i założenia własnego konta, które oferujemy za darmo. 
+			</div>
+			<div style="clear:both;"></div>
 		</div>
 		
+		<div id="sidebar">
+			<a href="index.php">
+			<div class="optionL" style="color: #000000">Strona główna</div></a>
+			<div class="optionL" style="color: #000000">Ankiety</div>
+			<div class="optionL" style="color: #000000">Edytuj dane</div>
+		</div>
+		
+		<div id="content">
+			<span class="bigtitle">Rejestracja</span>
+			
+			<div class="dottedline"></div>
+				<div id = rejestruj style="margin-left: 5%;">
+                <form method="POST" action="rejestracja.php">
+                <b>Login:</b> <input type="text" name="login" style="margin-left: 9.3%;"><br>
+                <b>Hasło:</b> <input type="password" name="haslo1" style="margin-left: 9.3%;"><br>
+                <b>Powtórz hasło:</b> <input type="password" name="haslo2"><br>
+                <b>Email:</b> <input type="text" name="email" style="margin-left: 9.5%;"><br>
+                <input type="submit" value="Utwórz konto" name="rejestruj">
+                </form>
+				</div>
+			</div>	
+			</div>	
+		
+		<div id="footer">
+			Najlepszy darmowy serwis z ankietami
+		</div>
 	</div>
-
         </body>
 </html>
