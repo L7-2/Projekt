@@ -58,20 +58,53 @@
 <!-- Logowanie -->
 
 <?php
-session_start();
-mysql_connect("localhost","root","");
-mysql_select_db("mydb");
-?>
+include 'config.php';
+db_connect();
  
-<form method="POST" action="logowanie.php">
-<b>Login:</b> <input type="text" name="login"><br>
-<b>Hasło:</b> <input type="password" name="haslo"><br>
-<input type="submit" value="Zaloguj" name="loguj">
-</form>
-
-<!-- Hero Area Section End-->
-
-
+// sprawdzamy czy user nie jest przypadkiem zalogowany
+if(!$_SESSION['logged']) {
+    // jeśli zostanie naciśnięty przycisk "Zaloguj"
+    if(isset($_POST['name'])) {
+        // filtrujemy dane...
+        $_POST['name'] = clear($_POST['name']);
+        $_POST['password'] = clear($_POST['password']);
+        // i kodujemy hasło
+        $_POST['password'] = codepass($_POST['password']);
+ 
+        // sprawdzamy prostym zapytaniem sql czy podane dane są prawidłowe
+        $result = mysql_query("SELECT login, haslo FROM uzytkownicy WHERE login = '{$_POST['name']}' AND haslo = '{$_POST['password']}' LIMIT 1");
+        if(mysql_num_rows($result) > 0) {
+            // jeśli tak to ustawiamy sesje "logged" na true oraz do sesji "user_id" wstawiamy id usera
+            $row = mysql_fetch_assoc($result);
+            $_SESSION['logged'] = true;
+            $_SESSION['user_id'] = $row['user_id'];
+            echo '<p>Zostałeś poprawnie zalogowany! Możesz teraz przejść na <a href="index.php">stronę główną</a>.</p>';
+        } else {
+            echo '<p>Podany login i/lub hasło jest nieprawidłowe.</p>';
+        }
+    }
+ 
+    // wyświetlamy komunikat na zalogowanie się
+    echo '<form method="post" action="login.php">
+        <p>
+            Login:<br>
+            <input type="text" value="'.$_POST['name'].'" name="name">
+        </p>
+        <p>
+            Hasło:<br>
+            <input type="password" value="'.$_POST['password'].'" name="password">
+        </p>
+        <p>
+            <input type="submit" value="Zaloguj">
+        </p>
+    </form>';
+} else {
+echo '<p>Jesteś już zalogowany, więc nie możesz się zalogować ponownie.</p>
+        <p>[<a href="index.php">Powrót</a>]</p>';
+}
+ 
+db_close();
+?>
 
  </body>
     </html>
