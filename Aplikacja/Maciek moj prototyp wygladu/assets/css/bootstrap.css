@@ -5990,6 +5990,17 @@ button.close {
        -o-transform: translate3d(0, 0, 0);
           transform: translate3d(0, 0, 0);
 }
+
+#sidebar {
+  position: fixed;
+  top: 0;
+}
+
+.Fixed
+{
+    position: fixed;
+    top: 20px;
+}
 @-ms-viewport {
   width: device-width;
 }

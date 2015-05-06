@@ -3,8 +3,17 @@
 </head>
 
 <?php 
+	
+	function filtruj($zmienna)
+{
+    if(get_magic_quotes_gpc())
+        $zmienna = stripslashes($zmienna); // usuwamy slashe
+ 
+	// usuwamy spacje, tagi html oraz niebezpieczne znaki
+    return mysql_real_escape_string(htmlspecialchars(trim($zmienna)));
+}
 	header('Content-Type: text/html; charset=utf-8'); 
-
+	
 	
 	
 	session_start();

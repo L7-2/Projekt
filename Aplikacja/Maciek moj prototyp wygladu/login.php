@@ -51,61 +51,43 @@
           </button>
           <a class="navbar-brand" href="#home"><i class="fa fa-briefcase"></i> Logowanie</a>
         </div>
+		
 
-      
+			<?php
+			function logowanie() { 
+     
+if($_SESSION['logowanie'] == 'poprawne') { 
+     
+   $string  = '<FORM action="'.getenv(REQUEST_URI).'" method="post">'; 
+      $string .= '   <INPUT type="submit" name="wylogowanie" value="Wyloguj">'; 
+      $string .= '</FORM>'; 
+       
+} else { 
+   $string = '<FORM action="'.getenv(REQUEST_URI).'" method="post">'; 
+      $string .= '<UL style="list-style-type: none; margin: 0; padding: 
+0;">'; 
+       
+      if(isset($_SESSION['logowanie'])) $string .= 
+'<LI>'.$_SESSION['logowanie'].'</LI>'; 
+       
+      $string .= '<LI>Login: <INPUT type="text" name="login"></LI>'; 
+      $string .= '<LI>Haslo: <INPUT type="text" name="haslo"></LI>'; 
+      $string .= '<LI><INPUT type="submit" name="logowanie" value="Logowanie"></LI>'; 
+      $string .= '</UL>'; 
+      $string .= '</FORM>'; 
+       
+} 
+return $string; 
+} 
+			?>
+		
+		
+		
+       </body>
+    </html>
 <!-- Nav Menu Section End -->
 
 <!-- Logowanie -->
 
-<?php
-include 'config.php';
-db_connect();
- 
-// sprawdzamy czy user nie jest przypadkiem zalogowany
-if(!$_SESSION['logged']) {
-    // jeśli zostanie naciśnięty przycisk "Zaloguj"
-    if(isset($_POST['name'])) {
-        // filtrujemy dane...
-        $_POST['name'] = clear($_POST['name']);
-        $_POST['password'] = clear($_POST['password']);
-        // i kodujemy hasło
-        $_POST['password'] = codepass($_POST['password']);
- 
-        // sprawdzamy prostym zapytaniem sql czy podane dane są prawidłowe
-        $result = mysql_query("SELECT login, haslo FROM uzytkownicy WHERE login = '{$_POST['name']}' AND haslo = '{$_POST['password']}' LIMIT 1");
-        if(mysql_num_rows($result) > 0) {
-            // jeśli tak to ustawiamy sesje "logged" na true oraz do sesji "user_id" wstawiamy id usera
-            $row = mysql_fetch_assoc($result);
-            $_SESSION['logged'] = true;
-            $_SESSION['user_id'] = $row['user_id'];
-            echo '<p>Zostałeś poprawnie zalogowany! Możesz teraz przejść na <a href="index.php">stronę główną</a>.</p>';
-        } else {
-            echo '<p>Podany login i/lub hasło jest nieprawidłowe.</p>';
-        }
-    }
- 
-    // wyświetlamy komunikat na zalogowanie się
-    echo '<form method="post" action="login.php">
-        <p>
-            Login:<br>
-            <input type="text" value="'.$_POST['name'].'" name="name">
-        </p>
-        <p>
-            Hasło:<br>
-            <input type="password" value="'.$_POST['password'].'" name="password">
-        </p>
-        <p>
-            <input type="submit" value="Zaloguj">
-        </p>
-    </form>';
-} else {
-echo '<p>Jesteś już zalogowany, więc nie możesz się zalogować ponownie.</p>
-        <p>[<a href="index.php">Powrót</a>]</p>';
-}
- 
-db_close();
-?>
 
- </body>
-    </html>
    

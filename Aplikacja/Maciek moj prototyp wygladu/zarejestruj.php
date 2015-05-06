@@ -197,7 +197,7 @@ if (isset($_POST['rejestruj']))
 		if ($haslo1 == $haslo2) // sprawdzamy czy has³a takie same
 		{
 			mysql_query("INSERT INTO `uzytkownicy` (`Login`, `Haslo`, `Adres_email`, `Data_zalozenia_konta`)
-				VALUES ('".$login."', '".md5($haslo1)."', '".$email."', '".date("Y-m-d")."');");
+				VALUES ('".$login."', '".($haslo1)."', '".$email."', '".date("Y-m-d")."');");
 				
  
 			echo "Konto zostalo utworzone!";
