@@ -1,8 +1,12 @@
 
 
 <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2" />
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
+
+
+<!-- Tutaj dynamicznie tworze pola do dodawania pytan -->
   <script>
   var x;
   $(document).ready(function() {
@@ -20,7 +24,7 @@
             x++; //text box increment
 
 	
-		$(wrapper).append('<p><div>Pytanie nr '+ x +'&nbsp<input type="text" name="mytext[]"/><a href="#" class="remove_field">Usun</a></div></p>' ); //add input box
+		$(wrapper).append('<p><div>Pytanie nr '+ x +'&nbsp<input type="text" name="mytext_'+ x +'" /><a href="#" class="remove_field">Usun</a></div></p>' ); //add input box
 		
         }
 		else alert('Mozna dodac maksymalnie 10 pytan');
@@ -37,29 +41,20 @@
 	)
 });</script>
 
-<div class="input_fields_wrap">
-    <button class="add_open">Dodaj wiecej pytan</button>
 
+<!-- kod html, ktory wyswietlam na stronie -->
+<form action=" PytaniaOtwarteDodaj_action.php"method="POST">
+<div class="input_fields_wrap">
+    <button class="add_open">Dodaj wiecej pytan</button>  <!-- przycisk oprogramowany w js, aby dodac kolejen pole -->
+	<input name="submit" type="submit" value="Przeslij pytania">  <!--przycisk do wyslania zapytania -->
 	<br></br>
-	<p>Pytanie nr 1 <input type="text" name="mytext[]"/></p>
+	<p>Pytanie nr 1 <input type="text" name="mytext_1"/></p>
+	
 </div>
 
-<?php
-mysql_connect("localhost","root","");
-mysql_select_db("mydb");
- 
-function filtruj($zmienna)
-{
-    if(get_magic_quotes_gpc())
-        $zmienna = stripslashes($zmienna); // usuwamy slashe
- 
-	// usuwamy spacje, tagi html oraz niebezpieczne znaki
-    return mysql_real_escape_string(htmlspecialchars(trim($zmienna)));
-}
- 
+</form>
 
-			mysql_query("INSERT INTO `pytania` (`idpytania`, `tresc`)
-				VALUES ('".$x."',".$mytext[]" );
-				
 
-?>
+
+
+
