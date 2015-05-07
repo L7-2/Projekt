@@ -6,7 +6,7 @@
 		
 		
 		<style type="text/css">
-		#fixme { 
+			#fixme { 
 			margin-left: 40%;
 			display:inline-block;
 			vertical-align:top;
@@ -27,6 +27,7 @@
 			border-left:1px dashed #000;
 			border-right:1px dashed #000;
 			padding-left:2px; }
+
 		</style>
 		
 		
@@ -82,7 +83,7 @@
             x++; //text box increment
 
 		
-		$(wrapper).append('<p><div>Pytanie nr '+ x +'&nbsp<input type="text" class="form-control" placeholder="Treść pytania"name="mytext_'+ x +'" /><a href="#" class="remove_field">Usun</a></div></p>' ); //add input box
+		$(wrapper).append('<p><div>Pytanie nr '+ x +'&nbsp<span class="glyphicon glyphicon-question-sign"></span><input type="text" class="form-control" placeholder="Treść pytania"name="mytext_'+ x +'" /><a href="#" class="remove_field">Usun</a></div></p>' ); //add input box
 		window.scrollTo(0,document.body.scrollHeight);
 		
 		
@@ -111,7 +112,7 @@
 	
 	</div>
 	<br></br>
-	<p>Pytanie nr 1 <input type="text" class="form-control" placeholder="Tresc pytania" name="mytext_1"/></p>
+	<p>Pytanie nr 1 <span class="glyphicon glyphicon-question-sign"></span></p> <input type="text" class="form-control" placeholder="Tresc pytania" name="mytext_1"/></p>
 	<script>window.scrollTo(0,document.body.scrollHeight);</script>
 	
 </div>

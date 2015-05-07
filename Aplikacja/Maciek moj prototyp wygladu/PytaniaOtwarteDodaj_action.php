@@ -30,7 +30,7 @@
 		mysql_query('SET NAME utf8');
 		mysql_query("SET CHARACTER SET 'utf8'");
 		
-		for ($i = 1; $i <= 10; $i++) {
+		for ($i = 1; $i <= 100; $i++) {
 			if(isset($_POST["mytext_{$i}"])){
 				$_POST["mytext_{$i}"] = htmlentities($_POST["mytext_{$i}"], ENT_QUOTES, "UTF-8");
 				$_POST["mytext_{$i}"] = mysqli_real_escape_string($polaczenie, $_POST["mytext_{$i}"]); 

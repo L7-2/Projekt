@@ -10,6 +10,30 @@ html {
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
+
+	#fixme { 
+			margin-left: 40%;
+			display:inline-block;
+			vertical-align:top;
+			position: absolute; 
+			left: 0px; 
+			top: 0px; 
+		}
+		#fixmetoo { 
+			position: absolute; 
+			right: 0px; 
+			bottom: 0px; 
+		}
+		div > div#fixme { position: fixed; }
+		div > div#fixmetoo { position: fixed; }
+		
+		pre.fixit { 
+			overflow:auto;
+			border-left:1px dashed #000;
+			border-right:1px dashed #000;
+			padding-left:2px; }
+
+
 body {
   margin: 0;
 }
@@ -5991,7 +6015,7 @@ button.close {
           transform: translate3d(0, 0, 0);
 }
 
-#sidebar {
+#sidebar.affix {
   position: fixed;
   top: 0;
 }
