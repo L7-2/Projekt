@@ -91,7 +91,7 @@
 
 
 <!-- kod html, ktory wyswietlam na stronie -->
-<form action="PytaniaZamknieteDodaj_action" method="POST">
+<form action="PytaniaZamknieteDodaj_action.php " method="POST">
 <div class="input_fields_wrap">
 	<div class="guziki"	id="fixme">
 		<button style="fixed" id="sidebar" class="btn btn-success add_open fixed">Dodaj więcej odpowiedzi</button>  <!-- przycisk oprogramowany w js, aby dodac kolejen pole -->
@@ -100,13 +100,13 @@
 	</div>
 		<br></br>
 		<div class="form-group has-feedback">
-			<label class="control-label">Pytanie</label>
-			<input type="text" class="form-control" placeholder="Treść pytania" name="trescZamkniete" />
+			<label  class="control-label">Pytanie</label>
+			<input type="text" required class="form-control"  placeholder="Treść pytania" name="trescZamkniete" />
 			<i class="glyphicon glyphicon-question-sign form-control-feedback"></i>
 		</div>
 	
-		<strong>Odpowiedzi: </strong><br><input type="text"  class="form-control" placeholder="Odp A" name="odp_1"/></p>
-															<input type="text"  class="form-control" placeholder="Odp B" name="odp_2"/></p>
+		<strong>Odpowiedzi: </strong><br><input type="text"  required class="form-control" placeholder="Odp A" name="odp_1"/></p>
+															<input type="text"  required class="form-control" placeholder="Odp B" name="odp_2"/></p>
 	
 </div>
 

@@ -104,7 +104,7 @@
 
 
 <!-- kod html, ktory wyswietlam na stronie -->
-<form action=" PytaniaOtwarteDodaj_action.php"method="POST">
+<form action=" PytaniaOtwarteDodaj_action.php <?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"method="POST">
 <div class="input_fields_wrap" id="content">
 	<div class="guziki"	id="fixme">
 		<button style="fixed" id="sidebar" class="btn btn-success add_open fixed">Dodaj więcej pytań</button>  <!-- przycisk oprogramowany w js, aby dodac kolejen pole -->
@@ -112,7 +112,7 @@
 	
 	</div>
 	<br></br>
-	<p>Pytanie nr 1 <span class="glyphicon glyphicon-question-sign"></span></p> <input type="text" class="form-control" placeholder="Tresc pytania" name="mytext_1"/></p>
+	<p>Pytanie nr 1 <span class="glyphicon glyphicon-question-sign"></span></p> <input type="text"  required class="form-control" placeholder="Tresc pytania" name="mytext_1"/></p>
 	<script>window.scrollTo(0,document.body.scrollHeight);</script>
 	
 </div>

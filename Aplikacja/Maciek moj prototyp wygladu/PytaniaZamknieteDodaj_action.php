@@ -57,7 +57,7 @@
 									AND Ankiety_idAnkiety = '{$idAnkiety}' 
 									AND Ankiety_Uzytkownicy_idUsers = '{$idUzytkownika}'";
 									
-									for ($i = 1; $i <= 25; $i++) {
+									for ($i = 1; $i <= 26; $i++) {
 										if(isset($_POST["odp_{$i}"])){
 										$_POST["odp_{$i}"] = htmlentities($_POST["odp_{$i}"], ENT_QUOTES, "UTF-8");
 										$_POST["odp_{$i}"] = mysqli_real_escape_string($polaczenie, $_POST["odp_{$i}"]); 
