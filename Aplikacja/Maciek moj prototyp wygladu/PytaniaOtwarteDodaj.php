@@ -1,10 +1,9 @@
 <html lang="pl">
       <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2" />
-		
-		
+	</head>
 		<style type="text/css">
 			#fixme { 
 			margin-left: 40%;
@@ -68,7 +67,7 @@
   var x;
   var scroll;
   $(document).ready(function() {
-    var max_fields      = 100; //maximum input boxes allowed
+    var max_fields      = 30; //maximum input boxes allowed
     var wrapper         = $(".input_fields_wrap"); //Fields wrapper
 	 var wrapper2         = $(".input_fields_wrap2"); //Fields wrapper
     var add_button      = $(".add_open"); //Add button ID
@@ -81,7 +80,7 @@
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-
+		
 		
 		$(wrapper).append('<p><div>Pytanie nr '+ x +'&nbsp<span class="glyphicon glyphicon-question-sign"></span><input type="text" class="form-control" placeholder="Treść pytania"name="mytext_'+ x +'" /><a href="#" class="remove_field">Usun</a></div></p>' ); //add input box
 		window.scrollTo(0,document.body.scrollHeight);
@@ -100,11 +99,13 @@
 	
 	
 	)
+	
+	
 });</script>
 
 
 <!-- kod html, ktory wyswietlam na stronie -->
-<form action=" PytaniaOtwarteDodaj_action.php <?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"method="POST">
+<form action=" PytaniaOtwarteDodaj_action.php "method="POST">
 <div class="input_fields_wrap" id="content">
 	<div class="guziki"	id="fixme">
 		<button style="fixed" id="sidebar" class="btn btn-success add_open fixed">Dodaj więcej pytań</button>  <!-- przycisk oprogramowany w js, aby dodac kolejen pole -->
@@ -118,7 +119,7 @@
 </div>
 
 </form>
-
+</html>
 
 
 

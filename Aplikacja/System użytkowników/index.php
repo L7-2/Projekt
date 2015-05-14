@@ -1,5 +1,7 @@
 ﻿<?php
 session_start();
+
+//echo "php info: ----->"phpinfo();
 if(isset($_SESSION['zalogowany'])&&($_SESSION['zalogowany']==true))
 {
 	header('Location: menu.php');

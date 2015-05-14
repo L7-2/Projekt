@@ -44,38 +44,44 @@
 						$_POST["trescZamkniete"] = mysqli_real_escape_string($polaczenie, $_POST["trescZamkniete"]); 
 						$tresc = $_POST["trescZamkniete"] ;
 
-						echo "tresc pytania:{$tresc}";
+					//	echo "tresc pytania:{$tresc}";
 						$sql = "INSERT INTO `pytania` (`Tresc`, `Ankiety_idAnkiety`, `Ankiety_Uzytkownicy_idUsers`) 
 						VALUES ('{$tresc}', '{$idAnkiety}','{$idUzytkownika}')";   
 						
 						if (!mysqli_query($polaczenie,$sql)) {
 						die('Error: ' . mysqli_error($polaczenie));
 						} else {	
-									//Odczytanie idPytania tego uzytkownika ktory jest zalogowany w tej sesji i wprowadzil do niego treosc
-									$Pytania_idPytania = "SELECT idPytania from pytania 
-									where Tresc = '{$tresc}' 
-									AND Ankiety_idAnkiety = '{$idAnkiety}' 
-									AND Ankiety_Uzytkownicy_idUsers = '{$idUzytkownika}'";
+								//Odczytanie idPytania tego uzytkownika ktory jest zalogowany w tej sesji i wprowadzil do niego treosc
+								$Pytania_idPytania = "SELECT idPytania from pytania 
+								where Tresc = '{$tresc}' 
+								AND Ankiety_idAnkiety = '{$idAnkiety}' 
+								AND Ankiety_Uzytkownicy_idUsers = '{$idUzytkownika}'";
 									
-									for ($i = 1; $i <= 26; $i++) {
-										if(isset($_POST["odp_{$i}"])){
+									
+									$i=1;
+										while(isset($_POST["odp_{$i}"])){
 										$_POST["odp_{$i}"] = htmlentities($_POST["odp_{$i}"], ENT_QUOTES, "UTF-8");
 										$_POST["odp_{$i}"] = mysqli_real_escape_string($polaczenie, $_POST["odp_{$i}"]); 
 										$odp = $_POST["odp_{$i}"];
-					
-									//Zapytanie sql, do jakiej tabeli wlozyc te odpowiedzi?????
-									 $sql2= "INSERT INTO `odp_zamknieta` (`Tresc`, `Pytania_idPytania`, `Pytania_Ankiety_idAnkiety`, 'Pytania_Ankiety_Uzytkownicy_idUsers') 
-									VALUES ('{$odp}', '{$Pytania_idPytania}','{$idAnkiety}', '{$idUzytkownika}')";   
+										echo $odp;
+										$i++;
 									
+									$sql2= "INSERT INTO `odp_zamknieta` (`Tresc`, `Pytania_idPytania`, `Pytania_Ankiety_idAnkiety`, 'Pytania_Ankiety_Uzytkownicy_idUsers') 
+									VALUES ('{$odp}', '{$Pytania_idPytania}','{$idAnkiety}', '{$idUzytkownika}')";   
+								
 									if (!mysqli_query($polaczenie,$sql2)) {
 										die('Error: ' . mysqli_error($polaczenie));
 										} else {
-													echo "{$odp}";} 
+													echo "{$odp}";
+													} 
 												}
-											}
 									   }
 									}
-								}	
+								}else {
+									echo "Nie jesteś zalogowany";
+									header('Refresh: 3;url=index.php');  //po 3 sekundach przekierowuje nas do strony glownej
+								
+								}
 							}
 
 

@@ -55,7 +55,7 @@
   <script>
   var x;
   $(document).ready(function() {
-    var max_fields      = 26; //maximum input boxes allowed
+    var max_fields      = 20; //maximum input boxes allowed
     var wrapper         = $(".input_fields_wrap"); //Fields wrapper
 	 var wrapper2         = $(".input_fields_wrap2"); //Fields wrapper
     var add_button      = $(".add_open"); //Add button ID
@@ -65,7 +65,7 @@
 	 var i=67;  //kod asci znaku od ktorego zaczynam numerowac odpowiedzi tutaj 65 = A 
 	 
 
-    var x = 2; //initlal text box count
+    var x = 3; //initlal text box count
     $(add_button).click(function(e){ //on add input button click
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
