@@ -65,7 +65,26 @@ if(isset($_SESSION['zalogowany'])&&($_SESSION['zalogowany']==true))
                     value="1">Mężczyzna
                  <br/><br/>
                  Data urodzenia (0000-00-00): <br/> <input name="data_ur" type="date"<br/><br/><br/>
-                 Miejsce zamieszkania: <br/> <input type="text" name="miejsce_zam"/><br/><br/>
+                   <p>Województwo<br>
+                   <select name="wojewodztwo">
+                   <option value="dolnoslaskie" selected>dolnośląskie</option>
+                   <option value="kujawsko-pomorskie">kujawsko-pomorskie</option>
+                   <option value="lubelskie">lubelskie</option>
+                   <option value="lubuskie">lubuskie</option>
+                   <option value="lodzkie">łódzkie</option>
+                   <option value="malopolskie">małopolskie</option>
+                   <option value="mazowieckie">mazowieckie</option>
+                   <option value="opolskie">opolskie</option>
+                   <option value="podkarpackie">podkarpackie</option>
+                   <option value="podlaskie">podlaskie</option>
+                   <option value="pomorskie">pomorskie</option>
+                   <option value="slaskie">śląskie</option>
+                   <option value="swietokrzyskie">świętokrzyskie</option>
+                   <option value="warminsko-mazurskie">warmińsko-mazurskie</option>
+                   <option value="wielkopolskie">wielkopolskie</option>
+                   <option value="zachodniopomorskie">zachodniopomorskie</option>
+                   </select>
+                   </p>
                  Hasło: <br/> <input type="password" name="haslo"/><br/>
                  <input type="submit" value="Zmień dane">   
                  <br/>

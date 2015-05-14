@@ -66,13 +66,45 @@ if(isset($_SESSION['zalogowany'])&&($_SESSION['zalogowany']==true))
 			<div class="dottedline"></div>
 				<div id = rejestruj style="margin-left: 5%;">
                 <form method="POST" action="rejestracja.php">
-                <b>Login:</b> <input type="text" name="login" style="margin-left: 9.3%;"><br>
-                <b>Hasło:</b> <input type="password" name="haslo1" style="margin-left: 9.3%;"><br>
-                <b>Powtórz hasło:</b> <input type="password" name="haslo2"><br>
-                <b>Email:</b> <input type="text" name="email" style="margin-left: 9.5%;"><br>
-                <input type="submit" value="Utwórz konto" name="rejestruj">
+                <b>Login:</b> <input type="text" name="login" style="margin-left: 9.3%;"/><br>
+                <b>Hasło:</b> <input type="password" name="haslo1" style="margin-left: 9.3%;"/><br>
+                <b>Powtórz hasło:</b> <input type="password" name="haslo2"/><br>
+                <b>Email:</b> <input type="text" name="email" style="margin-left: 9.5%;"/><br>
+                <b>Imie:</b> <input type="text" name="imie" style="margin-left: 9.3%;"/><br/>
+                 <b>Nazwisko:</b>  <input type="text" name="nazwisko" style="margin-left: 9.3%;"/><br/>
+                 <b>Płeć:</b>
+                 <input type="radio" name="plec"
+                    <?php if (isset($plec) && $plec=="female");?>
+                    value="0">Kobieta
+                    <input type="radio" name="plec"
+                    <?php if (isset($plec) && $plec=="male");?>
+                    value="1">Mężczyzna
+                 <br/>
+                 <b>Data urodzenia (0000-00-00):</b> <input name="data_ur" type="date"/><br/>
+                  <b> Województwo:<br></b>
+                   <select name="wojewodztwo">
+                   <option value="dolnoslaskie" selected>dolnośląskie</option>
+                   <option value="kujawsko-pomorskie">kujawsko-pomorskie</option>
+                   <option value="lubelskie">lubelskie</option>
+                   <option value="lubuskie">lubuskie</option>
+                   <option value="lodzkie">łódzkie</option>
+                   <option value="malopolskie">małopolskie</option>
+                   <option value="mazowieckie">mazowieckie</option>
+                   <option value="opolskie">opolskie</option>
+                   <option value="podkarpackie">podkarpackie</option>
+                   <option value="podlaskie">podlaskie</option>
+                   <option value="pomorskie">pomorskie</option>
+                   <option value="slaskie">śląskie</option>
+                   <option value="swietokrzyskie">świętokrzyskie</option>
+                   <option value="warminsko-mazurskie">warmińsko-mazurskie</option>
+                   <option value="wielkopolskie">wielkopolskie</option>
+                   <option value="zachodniopomorskie">zachodniopomorskie</option>
+                   </select>
+               <br/><input type="submit" value="Utwórz konto" name="rejestruj">
                 </form>
 				<?php
+                                if(isset($_SESSION['blad_dane'])){ echo $_SESSION['blad_dane'];
+                                unset($_SESSION['blad_dane']);}
 				if(isset($_SESSION['zlehaslo'])) {echo $_SESSION['zlehaslo'];
 				unset($_SESSION['zlehaslo']);}
 				if(isset($_SESSION['zajetylogin'])) {echo $_SESSION['zajetylogin'];

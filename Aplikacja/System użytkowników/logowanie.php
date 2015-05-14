@@ -1,5 +1,7 @@
 ﻿<?php
 session_start();
+
+
 if((!isset($_POST['login']))||(!isset($_POST['haslo'])))
 {
 	header('Location: index.php');
@@ -46,7 +48,7 @@ if((!isset($_POST['login']))||(!isset($_POST['haslo'])))
                 if($uzytkownicy>0) // jezeli udalo sie zalogowac i login i haslo znajduje sie w bazie danych
                  {
                     unset($_SESSION['blad']);
-                    $_SESSION['zablokowany']='<span style="color:red">Twoje konto jest zablokowane huehue!</span>';
+                    $_SESSION['zablokowany']='<span style="color:red">Twoje konto jest zablokowane!</span>';
                     header('Location: index.php');
                  }
                 else
