@@ -80,8 +80,9 @@
 
         <div class="col-md-6 col-sm-6 col-xs-12 animated fadeInRight delay-0-5">
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
-        <a href="#" class="btn btn-common btn-lg">Zarejestruj się</a>
-       <a href="#" class="btn btn-primary btn-lg">Zaloguj</a>
+       
+		 <a href="zarejestruj.php" class="btn btn-primary btn-lg">Zarejestruj</a>
+		<a href="login.php" class="btn btn-success btn-lg">Zaloguj</a>
         </div>
 
 </div>
