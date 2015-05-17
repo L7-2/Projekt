@@ -43,12 +43,12 @@
 				//ABY DZIALALO MUSIMY ODCZYTAĆ ZMIENNE SESYJNE !!
 				if(isset($_SESSION['id'] ) && isset($_SESSION['idAnkiety'])){
 				//Przypisuje zmienne sesyjne aby skorzystac z nich w zapytaniu SQL i wprowadzic je do bazy
-					$idUzytkownika = $_SESSION['id'] ;
+					//$idUzytkownika = $_SESSION['id'] ;
 					$idAnkiety = $_SESSION['idAnkiety'];
 					
 					//Wprowadzam dane do bazy
-					$sql = "INSERT INTO `pytania` (`Tresc`, `Ankiety_idAnkiety`, `Ankiety_Uzytkownicy_idUsers`) 
-					VALUES ('{$tresc}', '{$idAnkiety}','{$idUzytkownika}')";   		
+					$sql = "INSERT INTO `pytania` (`Tresc`, `Ankiety_idAnkiety`) 
+					VALUES ('{$tresc}', '{$idAnkiety}')";   		
 
 					if (!mysqli_query($polaczenie,$sql)) {
 						die('Error: ' . mysqli_error($polaczenie));

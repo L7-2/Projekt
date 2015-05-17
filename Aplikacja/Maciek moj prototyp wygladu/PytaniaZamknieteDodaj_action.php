@@ -34,7 +34,7 @@
 		//Dodawanie tresci pytania zamknietego
 		if(isset($_SESSION['id'] ) && isset($_SESSION['idAnkiety']) ){
 			//sprawdza czy uzytkownik jest zalogowany tzn czy ma jakies id i czy zaczal tworzyc ankiete, bo bez tego nie moze stworzyc pytan
-					$idUzytkownika = $_SESSION['id'] ;
+				//	$idUzytkownika = $_SESSION['id'] ;
 					$idAnkiety = $_SESSION['idAnkiety'];
 
 					
@@ -45,8 +45,8 @@
 						$tresc = $_POST["trescZamkniete"] ;
 
 					//	echo "tresc pytania:{$tresc}";
-						$sql = "INSERT INTO `pytania` (`Tresc`, `Ankiety_idAnkiety`, `Ankiety_Uzytkownicy_idUsers`) 
-						VALUES ('{$tresc}', '{$idAnkiety}','{$idUzytkownika}')";   
+						$sql = "INSERT INTO `pytania` (`Tresc`, `Ankiety_idAnkiety`) 
+						VALUES ('{$tresc}', '{$idAnkiety}')";   
 						
 						if (!mysqli_query($polaczenie,$sql)) {
 						die('Error: ' . mysqli_error($polaczenie));
@@ -54,8 +54,7 @@
 								//Odczytanie idPytania tego uzytkownika ktory jest zalogowany w tej sesji i wprowadzil do niego treosc
 								$Pytania_idPytania = "SELECT idPytania from pytania 
 								where Tresc = '{$tresc}' 
-								AND Ankiety_idAnkiety = '{$idAnkiety}' 
-								AND Ankiety_Uzytkownicy_idUsers = '{$idUzytkownika}'";
+								AND Ankiety_idAnkiety = '{$idAnkiety}' ";
 									
 									
 									$i=1;
@@ -66,8 +65,8 @@
 										echo $odp;
 										$i++;
 									
-									$sql2= "INSERT INTO `odp_zamknieta` (`Tresc`, `Pytania_idPytania`, `Pytania_Ankiety_idAnkiety`, 'Pytania_Ankiety_Uzytkownicy_idUsers') 
-									VALUES ('{$odp}', '{$Pytania_idPytania}','{$idAnkiety}', '{$idUzytkownika}')";   
+									$sql2= "INSERT INTO `odp_zamknieta` (`Tresc`, `Pytania_idPytania`) 
+									VALUES ('{$odp}', '{$Pytania_idPytania}')";   
 								
 									if (!mysqli_query($polaczenie,$sql2)) {
 										die('Error: ' . mysqli_error($polaczenie));
