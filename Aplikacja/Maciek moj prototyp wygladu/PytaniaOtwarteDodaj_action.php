@@ -22,12 +22,8 @@
 	
 	session_start();
 	
-	$_SESSION['id'] = 1;
-	$_SESSION['idAnkiety'] = 10;
 	
 	$wrong = 0;  //do poprawnego wyswietlania komunikatu
-	$maksymalnaLiczbaPytan = 30;
-	
     include "connect.php";
     
     $polaczenie = @new mysqli($host, $db_user, $db_password, $db_name); // Ustawienie połączenia z bazą

@@ -61,8 +61,6 @@
 		
 <?php
 
-		$_SESSION['id'] = 1;
-		$_SESSION['idAnkiety'] = 10;
 //sprawdzam tutaj liczbe pytan, aby nie bylo wiecej niz 30
 
 	include "funkcje.php";
