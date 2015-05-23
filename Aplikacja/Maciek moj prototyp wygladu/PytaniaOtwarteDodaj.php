@@ -71,8 +71,10 @@ include "connect.php";
     else
     {
 		//Sprawdzam ile jest pytan, aby nie bylo wiecej niz max (30)
+		$IdAnkiety = $_SESSION['idAnkiety'] ;
 					$zapytanie = "SELECT count(idPytania) as liczbaPytan from pytania 
-								where Ankiety_idAnkiety = '5' ";
+								where Ankiety_idAnkiety = '{$IdAnkiety}' ";
+								}
 
 							if ($wynik = mysqli_query($polaczenie, $zapytanie)) {
 								$row = mysqli_fetch_assoc($wynik);

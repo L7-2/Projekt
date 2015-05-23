@@ -4,6 +4,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2" />
 		 <meta name="viewport" content="width=device-width, initial-scale=1">
+		 <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
 	</head>
 		<style type="text/css">
 			#fixme { 
@@ -85,7 +86,51 @@
 	
 
 	
+<?php
 
+include "connect.php";
+    
+    $polaczenie = @new mysqli($host, $db_user, $db_password, $db_name); // Ustawienie połączenia z bazą
+    if($polaczenie->connect_errno!=0) // jeśli nie uda się połączyć z bazą
+    {
+        echo "Error: ".$polaczenie->connect_errno;
+    }
+    else
+    {
+	
+			$maksAnkiet = 10;
+			//$_SESSION['id'] = 1;
+			
+			if(isset($_SESSION['id']))
+			{
+				$IdUser = $_SESSION['id'];
+				
+				//Sprawdzam ile jest ankiet (max 10)
+				$zapytanie = "SELECT count(idAnkiety) as liczbaAnkiet from ankiety
+				where Uzytkownicy_idUsers = {$IdUser} ";
+								
+				if ($wynik = mysqli_query($polaczenie, $zapytanie)) {
+					$row = mysqli_fetch_assoc($wynik);
+					$liczbaAnkiet = $row["liczbaAnkiet"] ;
+								
+					if($liczbaAnkiet > $maksAnkiet){
+						echo '<center><div class="alert alert-danger" role="alert">Masz już  ',$liczbaAnkiet,' ankiet nie możesz dodać więcej</div><center>';
+						header('Refresh: 2;url=index.php');  //po 2 sekundach przekierowuje nas do strony glownej
+						exit;
+					}
+	
+								
+				}
+				
+				
+			}
+			else {
+				echo '<center><div class="alert alert-danger" role="alert">Nie jesteś zalogowany</div><center>';
+				header('Refresh: 2;url=index.php');  //po 2 sekundach przekierowuje nas do strony glownej
+				exit;
+	}
+}
+?>
 	
 	<form method="POST" action="ankieta_action.php" >
 		<div class="input_fields_wrap" id="content">

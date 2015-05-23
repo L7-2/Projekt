@@ -1,3 +1,14 @@
+     <html lang="pl">
+      <head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	</head>
+	 
+	 <!-- Bootstrap -->
+        <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+
 <?php 
 	
 	function filtruj($zmienna)
@@ -26,7 +37,7 @@
     {
 		mysql_query('SET NAME utf8');
 		mysql_query("SET CHARACTER SET 'utf8'");
-		
+		if(isset($_SESSION['id'] ) ){
 			if(isset($_POST['submit'])){
 			$_POST["tytulAnkiety"] = htmlentities($_POST["tytulAnkiety"], ENT_QUOTES, "UTF-8");
 			$_POST["tytulAnkiety"] = mysqli_real_escape_string($polaczenie, $_POST["tytulAnkiety"]); 
@@ -38,22 +49,30 @@
 			
 			$Anonimowosc = $_POST["Anonimowosc"] ;
 			
-			if(isset($_SESSION['id'] ) && $Anonimowosc=="0")
-			{
+			
 				$id = $_SESSION['id'];
 				$sql = "INSERT INTO `Ankiety` (`Tytul`, `Opis`, `Anonimowosc`, `Uzytkownicy_idUsers`) 
 						VALUES ('{$tytulAnkiety}', '{$opisAnkiety}','{$Anonimowosc}','{$id}')";  
-				}
+						
+						if (!mysqli_query($polaczenie,$sql)) {
+							die('Error: ' . mysqli_error($polaczenie));
+						}else {
+							echo '<center><div class="alert alert-success" role="alert">Ankieta dodana poprawnie</div><center>';
+							header('Refresh: 2;url=index.php');  //po 2 sekundach przekierowuje nas do strony glownej
+						}
+			}
 				
 	
-				if (!mysqli_query($polaczenie,$sql)) {
-				die('Error: ' . mysqli_error($polaczenie));
-				}else {
-				echo "<center>Ankieta dodana poprawnie<center>";
-				header('Refresh: 2;url=index.php');  //po 2 sekundach przekierowuje nas do strony glownej
-				}
 				
-				}
+				
+				}else{
+				echo '<center><div class="alert alert-danger" role="alert">Nie jesteś zalogowany</div><center>';
+									header('Refresh: 2;url=index.php');  //po 2 sekundach przekierowuje nas do strony glownej
+									} 
+				
+				
 		
 		}
 ?>
+
+</html
