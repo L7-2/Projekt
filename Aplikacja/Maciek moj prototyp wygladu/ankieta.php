@@ -88,8 +88,7 @@
 	
 <?php
 
-$_SESSION['id'] = 1;
-		$_SESSION['idAnkiety'] = 10;
+
 	include "funkcje.php";
 
 	$_SESSION['pytanie'] = 0;
