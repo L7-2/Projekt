@@ -57,6 +57,35 @@
 
 
 
+		
+		
+		<?php
+
+include "connect.php";
+    
+    $polaczenie = @new mysqli($host, $db_user, $db_password, $db_name); // Ustawienie połączenia z bazą
+    if($polaczenie->connect_errno!=0) // jeśli nie uda się połączyć z bazą
+    {
+        echo "Error: ".$polaczenie->connect_errno;
+    }
+    else
+    {
+		//Sprawdzam ile jest pytan, aby nie bylo wiecej niz max (30)
+					$zapytanie = "SELECT count(idPytania) as liczbaPytan from pytania 
+								where Ankiety_idAnkiety = '5' ";
+
+							if ($wynik = mysqli_query($polaczenie, $zapytanie)) {
+								$row = mysqli_fetch_assoc($wynik);
+								$liczbaPytan = $row["liczbaPytan"] ;
+								
+								echo "<input type='hidden' id=liczbaPytan name=liczbaPytan value={$liczbaPytan} />";
+								}
+								
+								
+								
+								}
+	
+?>
 
 <!-- Tutaj dynamicznie tworze pola do dodawania pytan -->
   <script>
@@ -67,6 +96,9 @@
   var x;
   var scroll;
   $(document).ready(function() {
+  var liczbaPytanBaza = document.getElementById("liczbaPytan").value;
+	
+  
     var max_fields      = 30; //maximum input boxes allowed
     var wrapper         = $(".input_fields_wrap"); //Fields wrapper
 	 var wrapper2         = $(".input_fields_wrap2"); //Fields wrapper
@@ -74,26 +106,30 @@
 	// var add_button2      = $(".add_closed"); //Add button ID
 	var guziki = $(".guziki");
 	
+	
+	var liczbaPytan = liczbaPytanBaza;
     var x = 1; //initlal text box count
 	var scroll = 50;
     $(add_button).click(function(e){ //on add input button click
         e.preventDefault();
-        if(x < max_fields){ //max input box allowed
+        if(liczbaPytan < max_fields){ //max input box allowed
             x++; //text box increment
+			liczbaPytan++;
 		
-		
-		$(wrapper).append('<p><div>Pytanie nr '+ x +'&nbsp<span class="glyphicon glyphicon-question-sign"></span><input type="text" class="form-control" placeholder="Treść pytania"name="mytext_'+ x +'" /><a href="#" class="remove_field">Usun</a></div></p>' ); //add input box
+		$(wrapper).append('<p><div>Pytanie nr '+ x +'&nbsp<span class="glyphicon glyphicon-question-sign"></span><input type="text" class="form-control" placeholder="Treść pytania"name="mytext[]" /><a href="#" class="remove_field">Usun</a></div></p>' ); //add input box
 		window.scrollTo(0,document.body.scrollHeight);
 		
 		
         }
-		else alert('Mozna dodac maksymalnie ' + max_fields + ' pytan');
+		else alert('Mozna dodac maksymalnie ' + max_fields + ' pytan, masz juz '  + liczbaPytanBaza + ' w tej ankiecie');
     });
 	
 	
     
     $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
-        e.preventDefault(); $(this).parent('div').remove(); x--;
+        e.preventDefault(); $(this).parent('div').remove(); liczbaPytan--;
+
+		
 		e.preventDefault(); $(this).parent('p').remove(); 
     }
 	
@@ -104,22 +140,29 @@
 });</script>
 
 
+
+
+
+
+
 <!-- kod html, ktory wyswietlam na stronie -->
-<form action=" PytaniaOtwarteDodaj_action.php "method="POST">
+<form action= "PytaniaOtwarteDodaj_action.php" method="POST">
 <div class="input_fields_wrap" id="content">
 	<div class="guziki"	id="fixme">
 		<button style="fixed" id="sidebar" class="btn btn-success add_open fixed">Dodaj więcej pytań</button>  <!-- przycisk oprogramowany w js, aby dodac kolejen pole -->
 		<input name="submit" type="submit" class="btn btn-primary " value="Prześlij pytania">  <!--przycisk do wyslania zapytania -->
 	
+	
 	</div>
 	<br></br>
-	<p>Pytanie nr 1 <span class="glyphicon glyphicon-question-sign"></span></p> <input type="text"  required class="form-control" placeholder="Tresc pytania" name="mytext_1"/></p>
+	<p>Pytanie nr 1 <span class="glyphicon glyphicon-question-sign"></span></p> <input type="text"  required class="form-control" placeholder="Treść pytania" name="mytext[]"/></p>
 	<script>window.scrollTo(0,document.body.scrollHeight);</script>
 	
 </div>
 
 </form>
 </html>
+
 
 
 

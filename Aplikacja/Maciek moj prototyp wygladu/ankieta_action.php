@@ -14,6 +14,7 @@
 	
 	session_start();
 	
+	//$_SESSION['id'] = 1;  uzywane do testowania
     include "connect.php";
     
     $polaczenie = @new mysqli($host, $db_user, $db_password, $db_name); // Ustawienie połączenia z bazą
@@ -42,9 +43,6 @@
 				$id = $_SESSION['id'];
 				$sql = "INSERT INTO `Ankiety` (`Tytul`, `Opis`, `Anonimowosc`, `Uzytkownicy_idUsers`) 
 						VALUES ('{$tytulAnkiety}', '{$opisAnkiety}','{$Anonimowosc}','{$id}')";  
-				}else{
-					$sql = "INSERT INTO `Ankiety` (`Tytul`, `Opis`, `Anonimowosc`) 
-						VALUES ('{$tytulAnkiety}', '{$opisAnkiety}','{$Anonimowosc}')";  
 				}
 				
 	
@@ -52,6 +50,7 @@
 				die('Error: ' . mysqli_error($polaczenie));
 				}else {
 				echo "<center>Ankieta dodana poprawnie<center>";
+				header('Refresh: 2;url=index.php');  //po 2 sekundach przekierowuje nas do strony glownej
 				}
 				
 				}
