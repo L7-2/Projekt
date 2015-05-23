@@ -39,20 +39,22 @@
 		mysql_query("SET CHARACTER SET 'utf8'");
 		if(isset($_SESSION['id'] ) ){
 			if(isset($_POST['submit'])){
-			$_POST["tytulAnkiety"] = htmlentities($_POST["tytulAnkiety"], ENT_QUOTES, "UTF-8");
-			$_POST["tytulAnkiety"] = mysqli_real_escape_string($polaczenie, $_POST["tytulAnkiety"]); 
-			$tytulAnkiety = $_POST["tytulAnkiety"] ;
-			
-			$_POST["opisAnkietyy"] = htmlentities($_POST["opisAnkiety"], ENT_QUOTES, "UTF-8");
-			$_POST["opisAnkiety"] = mysqli_real_escape_string($polaczenie, $_POST["opisAnkiety"]); 
-			$opisAnkiety = $_POST["opisAnkiety"] ;
-			
-			$Anonimowosc = $_POST["Anonimowosc"] ;
-			
-			
-				$id = $_SESSION['id'];
-				$sql = "INSERT INTO `Ankiety` (`Tytul`, `Opis`, `Anonimowosc`, `Uzytkownicy_idUsers`) 
-						VALUES ('{$tytulAnkiety}', '{$opisAnkiety}','{$Anonimowosc}','{$id}')";  
+				//wstawiam tytul Ankiety, pobrany ze zmiennej wsylanej metoda POST
+				$_POST["tytulAnkiety"] = htmlentities($_POST["tytulAnkiety"], ENT_QUOTES, "UTF-8");
+				$_POST["tytulAnkiety"] = mysqli_real_escape_string($polaczenie, $_POST["tytulAnkiety"]); 
+				$tytulAnkiety = $_POST["tytulAnkiety"] ;
+				
+				//wstawiam opis Ankiety, pobrany ze zmiennej wsylanej metoda POST
+				$_POST["opisAnkietyy"] = htmlentities($_POST["opisAnkiety"], ENT_QUOTES, "UTF-8");
+				$_POST["opisAnkiety"] = mysqli_real_escape_string($polaczenie, $_POST["opisAnkiety"]); 
+				$opisAnkiety = $_POST["opisAnkiety"] ;
+				
+				$Anonimowosc = $_POST["Anonimowosc"] ;
+				
+				
+					$id = $_SESSION['id'];
+					$sql = "INSERT INTO `Ankiety` (`Tytul`, `Opis`, `Anonimowosc`, `Uzytkownicy_idUsers`) 
+							VALUES ('{$tytulAnkiety}', '{$opisAnkiety}','{$Anonimowosc}','{$id}')";  
 						
 						if (!mysqli_query($polaczenie,$sql)) {
 							die('Error: ' . mysqli_error($polaczenie));
@@ -61,18 +63,14 @@
 							header('Refresh: 2;url=index.php');  //po 2 sekundach przekierowuje nas do strony glownej
 						}
 			}
-				
-	
-				
-				
-				}else{
-				echo '<center><div class="alert alert-danger" role="alert">Nie jesteś zalogowany</div><center>';
-									header('Refresh: 2;url=index.php');  //po 2 sekundach przekierowuje nas do strony glownej
-									} 
+		}else{
+			echo '<center><div class="alert alert-danger" role="alert">Nie jesteś zalogowany</div><center>';
+						header('Refresh: 2;url=index.php');  //po 2 sekundach przekierowuje nas do strony glownej
+		} 
 				
 				
 		
-		}
+	}
 ?>
 
 </html

@@ -57,6 +57,15 @@
 	
 </head>
 
+<?php 
+
+	//sprawdzenie czy mamy mniej niz 30 pytan
+	include "funkcje.php";
+	$_SESSION['pytanie'] = 1;
+	sprawdzLiczbePytan(30);
+
+?>
+
 
 <!-- Tutaj dynamicznie tworze pola do dodawania pytan -->
   <script>
@@ -82,7 +91,7 @@
 			var litera = String.fromCharCode(i);
 			i++;
 			
-		$(wrapper).append('<p><div><input type="text"  class="form-control" placeholder="Odp '+ litera +'" name="odp[]"/><a href="#" class="remove_field">Usun</a></div></p>' ); //add input box
+		$(wrapper).append('<p><div><input type="text"  class="form-control" requiered placeholder="Odp '+ litera +'" name="odp[]"/><a href="#" class="remove_field">Usun</a></div></p>' ); //add input box
 		window.scrollTo(0,document.body.scrollHeight); //scrolluje do dolu strony
         }
 		else alert('Mozna dodac maksymalnie ' + max_fields + ' odpowiedzi');
@@ -106,7 +115,7 @@
 <form action = "PytaniaZamknieteDodaj_action.php" method="POST">
 <div class="input_fields_wrap" id="content">
 	<div class="guziki"	id="fixme">
-		<button style="fixed" id="sidebar" class="btn btn-success add_open fixed">Dodaj więcej pytań</button>  <!-- przycisk oprogramowany w js, aby dodac kolejen pole -->
+		<button style="fixed" id="sidebar" class="btn btn-success add_open fixed">Dodaj więcej odpowiedzi</button>  <!-- przycisk oprogramowany w js, aby dodac kolejen pole -->
 		<input name="submit" type="submit" class="btn btn-primary " value="Prześlij pytania">  <!--przycisk do wyslania zapytania -->
 	
 	</div>

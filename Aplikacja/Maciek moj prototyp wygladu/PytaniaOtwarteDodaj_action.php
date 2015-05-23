@@ -22,8 +22,8 @@
 	
 	session_start();
 	
-	//$_SESSION['id'] = 1;
-	//$_SESSION['idAnkiety'] = 5;
+	$_SESSION['id'] = 1;
+	$_SESSION['idAnkiety'] = 10;
 	
 	$wrong = 0;  //do poprawnego wyswietlania komunikatu
 	$maksymalnaLiczbaPytan = 30;
@@ -40,45 +40,38 @@
 		
 		mysql_query('SET NAME utf8');
 		mysql_query("SET CHARACTER SET 'utf8'");
-	
-		$i = 0;  //inicjuje zmienna wartoscia od ktorej zaczynam pytania
+		//ABY DZIALALO MUSIMY ODCZYTAĆ ZMIENNE SESYJNE !!
+		if(isset($_SESSION['id'] ) && isset($_SESSION['idAnkiety'])){
+			//Przypisuje zmienne sesyjne aby skorzystac z nich w zapytaniu SQL i wprowadzic je do bazy
+			//$idUzytkownika = $_SESSION['id'] ;
+			$idAnkiety = $_SESSION['idAnkiety'];
+					
+			$i = 0;  //inicjuje zmienna wartoscia od ktorej zaczynam pytania
 			while(isset($_POST['mytext'][$i])){
 				$_POST['mytext'][$i] = htmlentities($_POST['mytext'][$i], ENT_QUOTES, "UTF-8");
 				$_POST['mytext'][$i] = mysqli_real_escape_string($polaczenie, $_POST['mytext'][$i]); 
 				$tresc = $_POST['mytext'][$i];
-				
-				//echo $tresc;  wyswietlanie tresci pytania
-				
-				
+			
 				$i++;  //inkrementacja zmiennej aby przjesc do kolejnego pytania
-				//ABY DZIALALO MUSIMY ODCZYTAĆ ZMIENNE SESYJNE !!
-				if(isset($_SESSION['id'] ) && isset($_SESSION['idAnkiety'])){
-				//Przypisuje zmienne sesyjne aby skorzystac z nich w zapytaniu SQL i wprowadzic je do bazy
-					//$idUzytkownika = $_SESSION['id'] ;
-					$idAnkiety = $_SESSION['idAnkiety'];
-					
+				
 					//Wprowadzam dane do bazy
 					$sql = "INSERT INTO `pytania` (`Tresc`, `Ankiety_idAnkiety`) 
 					VALUES ('{$tresc}', '{$idAnkiety}')";   		
 
 					if (!mysqli_query($polaczenie,$sql)) {
 						die('Error: ' . mysqli_error($polaczenie));
-						} else {
-						
-									
-									
-									header('Refresh: 2;url=index.php');  //po 2 sekundach przekierowuje nas do strony glownej
-									
-								} 
+						} 
 								
-					}else {
+					}
+							
+			}
+			else {
 							$wrong =1;
 							echo '<center><div class="alert alert-danger" role="alert">Nie jesteś zalogowany</div><center>';
 							header('Refresh: 2;url=index.php');  //po 2 sekundach przekierowuje nas do strony glownej
 							break;
 							}
 							
-			}
 			if($wrong == 0)
 			echo '<center><div class="alert alert-success" role="alert">Pytania zostały poprawnie dodane do ankiety</div><center>';
 			header('Refresh: 2;url=index.php');  //po 2 sekundach przekierowuje nas do strony glownej

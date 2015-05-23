@@ -88,48 +88,14 @@
 	
 <?php
 
-include "connect.php";
-    
-    $polaczenie = @new mysqli($host, $db_user, $db_password, $db_name); // Ustawienie połączenia z bazą
-    if($polaczenie->connect_errno!=0) // jeśli nie uda się połączyć z bazą
-    {
-        echo "Error: ".$polaczenie->connect_errno;
-    }
-    else
-    {
+$_SESSION['id'] = 1;
+		$_SESSION['idAnkiety'] = 10;
+	include "funkcje.php";
+
+	$_SESSION['pytanie'] = 0;
 	
-			$maksAnkiet = 10;
-			//$_SESSION['id'] = 1;
-			
-			if(isset($_SESSION['id']))
-			{
-				$IdUser = $_SESSION['id'];
-				
-				//Sprawdzam ile jest ankiet (max 10)
-				$zapytanie = "SELECT count(idAnkiety) as liczbaAnkiet from ankiety
-				where Uzytkownicy_idUsers = {$IdUser} ";
-								
-				if ($wynik = mysqli_query($polaczenie, $zapytanie)) {
-					$row = mysqli_fetch_assoc($wynik);
-					$liczbaAnkiet = $row["liczbaAnkiet"] ;
-								
-					if($liczbaAnkiet > $maksAnkiet){
-						echo '<center><div class="alert alert-danger" role="alert">Masz już  ',$liczbaAnkiet,' ankiet nie możesz dodać więcej</div><center>';
-						header('Refresh: 2;url=index.php');  //po 2 sekundach przekierowuje nas do strony glownej
-						exit;
-					}
-	
-								
-				}
-				
-				
-			}
-			else {
-				echo '<center><div class="alert alert-danger" role="alert">Nie jesteś zalogowany</div><center>';
-				header('Refresh: 2;url=index.php');  //po 2 sekundach przekierowuje nas do strony glownej
-				exit;
-	}
-}
+//sprawdzam tutaj liczbe ankiet, aby nie bylo wiecej niz 10
+	sprawdzLiczbePytan(10);  
 ?>
 	
 	<form method="POST" action="ankieta_action.php" >

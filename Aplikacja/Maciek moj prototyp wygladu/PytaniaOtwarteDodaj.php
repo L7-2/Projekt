@@ -59,49 +59,29 @@
 
 		
 		
-		<?php
+<?php
 
-include "connect.php";
-    
-    $polaczenie = @new mysqli($host, $db_user, $db_password, $db_name); // Ustawienie połączenia z bazą
-    if($polaczenie->connect_errno!=0) // jeśli nie uda się połączyć z bazą
-    {
-        echo "Error: ".$polaczenie->connect_errno;
-    }
-    else
-    {
-		//Sprawdzam ile jest pytan, aby nie bylo wiecej niz max (30)
-		$IdAnkiety = $_SESSION['idAnkiety'] ;
-					$zapytanie = "SELECT count(idPytania) as liczbaPytan from pytania 
-								where Ankiety_idAnkiety = '{$IdAnkiety}' ";
-								}
+		$_SESSION['id'] = 1;
+		$_SESSION['idAnkiety'] = 10;
+//sprawdzam tutaj liczbe pytan, aby nie bylo wiecej niz 30
 
-							if ($wynik = mysqli_query($polaczenie, $zapytanie)) {
-								$row = mysqli_fetch_assoc($wynik);
-								$liczbaPytan = $row["liczbaPytan"] ;
-								
-								echo "<input type='hidden' id=liczbaPytan name=liczbaPytan value={$liczbaPytan} />";
-								}
-								
-								
-								
-								}
+	include "funkcje.php";
+	$_SESSION['pytanie'] = 1;
+	sprawdzLiczbePytan(30);
+	
 	
 ?>
 
 <!-- Tutaj dynamicznie tworze pola do dodawania pytan -->
   <script>
   
-  
-
-
-  var x;
+   var x;
   var scroll;
   $(document).ready(function() {
   var liczbaPytanBaza = document.getElementById("liczbaPytan").value;
 	
   
-    var max_fields      = 30; //maximum input boxes allowed
+    var max_fields      = 29; //maximum input boxes allowed
     var wrapper         = $(".input_fields_wrap"); //Fields wrapper
 	 var wrapper2         = $(".input_fields_wrap2"); //Fields wrapper
     var add_button      = $(".add_open"); //Add button ID
@@ -118,19 +98,21 @@ include "connect.php";
             x++; //text box increment
 			liczbaPytan++;
 		
-		$(wrapper).append('<p><div>Pytanie nr '+ x +'&nbsp<span class="glyphicon glyphicon-question-sign"></span><input type="text" class="form-control" placeholder="Treść pytania"name="mytext[]" /><a href="#" class="remove_field">Usun</a></div></p>' ); //add input box
+		$(wrapper).append('<p><div>Pytanie nr '+ x +'&nbsp<span class="glyphicon glyphicon-question-sign"></span><input type="text" required class="form-control" placeholder="Treść pytania"name="mytext[]" /><a href="#" class="remove_field">Usun</a></div></p>' ); //add input box
 		window.scrollTo(0,document.body.scrollHeight);
 		
 		
         }
-		else alert('Mozna dodac maksymalnie ' + max_fields + ' pytan, masz juz '  + liczbaPytanBaza + ' w tej ankiecie');
+		
+		else {
+		max_fields++;
+		alert('Mozna dodac maksymalnie 30 pytan, masz juz '  + liczbaPytanBaza + ' w tej ankiecie');}
     });
 	
 	
     
     $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
         e.preventDefault(); $(this).parent('div').remove(); liczbaPytan--;
-
 		
 		e.preventDefault(); $(this).parent('p').remove(); 
     }
