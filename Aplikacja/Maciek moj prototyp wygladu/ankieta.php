@@ -83,11 +83,13 @@
 
         <!-- jQuery Load -->
         <script src="assets/js/jquery-min.js"></script>
-	
+		<script src="bootstrap-maxlength.js"></script>
+
 
 	
 <?php
-
+	//$_SESSION['id'] = 1;
+	//$_SESSION['idAnkiety'] = 10;
 
 	include "funkcje.php";
 
@@ -103,8 +105,8 @@
 				<input name="submit" type="submit" class="btn btn-primary " value="Akceptuj">  <!--przycisk do wyslania zapytania -->
 			</div>
 			<br></br>
-			<p>Tytuł ankiety</p> <input type="text"  required class="form-control" placeholder="Tytuł" name="tytulAnkiety"/></p>
-			<p>Opis ankiety</p> <input type="text"  required class="form-control" placeholder="Opis" name="opisAnkiety"/></p>
+			<p>Tytuł ankiety</p> <input type="text"  maxlength="45" required class="form-control" placeholder="Tytuł" name="tytulAnkiety"/></p>
+			<p>Opis ankiety</p> <input type="text"  maxlength="45" required class="form-control" placeholder="Opis" name="opisAnkiety"/></p>
 			
 			
 			
@@ -121,7 +123,17 @@
 				
 
 			</form>
-
+			
+<script>$('input.form-control').maxlength({
+    alwaysShow: true,
+    threshold: 10,
+    warningClass: "label label-info",
+    limitReachedClass: "label label-danger",
+    placement: 'top',
+    preText: ' Wykorzystano ',
+    separator: ' z ',
+    postText: ' znaków.'
+});</script>
 				
 				<!-- Może pozniej sie to przyda?
 				

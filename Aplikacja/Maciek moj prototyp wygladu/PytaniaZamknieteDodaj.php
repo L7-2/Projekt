@@ -26,6 +26,7 @@
 
         <!-- jQuery Load -->
         <script src="assets/js/jquery-min.js"></script>
+		<script src="bootstrap-maxlength.js"></script>
 
 		
 		<style type="text/css">
@@ -59,6 +60,8 @@
 
 <?php 
 
+	//$_SESSION['id'] = 1;
+	//$_SESSION['idAnkiety'] = 10;
 	//sprawdzenie czy mamy mniej niz 30 pytan
 	include "funkcje.php";
 	$_SESSION['pytanie'] = 1;
@@ -91,8 +94,19 @@
 			var litera = String.fromCharCode(i);
 			i++;
 			
-		$(wrapper).append('<p><div><input type="text"  class="form-control" requiered placeholder="Odp '+ litera +'" name="odp[]"/><a href="#" class="remove_field">Usun</a></div></p>' ); //add input box
+		$(wrapper).append('<p><div><input type="text"  maxlength="45" class="form-control" requiered placeholder="Odp '+ litera +'" name="odp[]"/><a href="#" class="remove_field">Usun</a></div></p>' ); //add input box
 		window.scrollTo(0,document.body.scrollHeight); //scrolluje do dolu strony
+		
+		$('input.form-control').maxlength({
+    alwaysShow: true,
+    threshold: 10,
+    warningClass: "label label-info",
+    limitReachedClass: "label label-danger",
+    placement: 'top',
+    preText: ' Wykorzystano ',
+    separator: ' z ',
+    postText: ' znaków.'
+});
         }
 		else alert('Mozna dodac maksymalnie ' + max_fields + ' odpowiedzi');
     });
@@ -122,17 +136,28 @@
 	<br></br>
 	<div class="form-group has-feedback">
 			<label  class="control-label">Pytanie</label>
-			<input type="text" required class="form-control"  placeholder="Treść pytania" name="trescZamkniete" />
+			<input type="text" required class="form-control"  maxlength="45" placeholder="Treść pytania" name="trescZamkniete" />
 			<i class="glyphicon glyphicon-question-sign form-control-feedback"></i>
 		</div>
 	
-		<strong>Odpowiedzi: </strong><br><input type="text"  required class="form-control" placeholder="Odp A" name="odp[]"/></p>
-															<input type="text"  required class="form-control" placeholder="Odp B" name="odp[]"/></p>
+		<strong>Odpowiedzi: </strong><br><input type="text"  maxlength="45" required class="form-control" placeholder="Odp A" name="odp[]"/></p>
+															<input type="text" maxlength="45"  required class="form-control" placeholder="Odp B" name="odp[]"/></p>
 	
 </div>
 
 </form>
 
+<script>$('input.form-control').maxlength({
+    alwaysShow: true,
+    threshold: 10,
+    warningClass: "label label-info",
+    limitReachedClass: "label label-danger",
+    placement: 'top',
+    preText: ' Wykorzystano ',
+    separator: ' z ',
+    postText: ' znaków.'
+});</script>
+</html>
 
 
 
