@@ -59,8 +59,8 @@
 </head>
 
 <?php 
-
-	//$_SESSION['id'] = 1;
+	session_start();
+	//$_SESSION['id'] = null;
 	//$_SESSION['idAnkiety'] = 10;
 	//sprawdzenie czy mamy mniej niz 30 pytan
 	include "funkcje.php";

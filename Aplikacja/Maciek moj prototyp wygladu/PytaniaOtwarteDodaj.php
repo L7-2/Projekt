@@ -55,21 +55,19 @@
         <!-- jQuery Load -->
         <script src="assets/js/jquery-min.js"></script>
 		<script src="bootstrap-maxlength.js"></script>
+		
 
 
 
 		
 		
 <?php
-
-//sprawdzam tutaj liczbe pytan, aby nie bylo wiecej niz 30
-	
+	session_start();
 	//$_SESSION['id'] = 1;
 	//$_SESSION['idAnkiety'] = 10;
 	include "funkcje.php";
-	$_SESSION['pytanie'] = 1;
+	$_SESSION['pytanie'] = 1;  //do poprawnego wyswietlania echa, czy chodzi o ankiete czy pytanie
 	sprawdzLiczbePytan(30);
-	
 	
 ?>
 
@@ -81,7 +79,7 @@
   var scroll;
   $(document).ready(function() {
   
-  
+ 
   
   var liczbaPytanBaza = document.getElementById("liczbaPytan").value;
 	
@@ -103,7 +101,7 @@
             x++; //text box increment
 			liczbaPytan++;
 		
-		$(wrapper).append('<p><div>Pytanie nr '+ x +'&nbsp<span class="glyphicon glyphicon-question-sign"></span><input type="text" maxlength="45" required class="form-control" placeholder="Treść pytania"name="mytextb[]" /><a href="#" class="remove_field">Usun</a></div></p>' ); //add input box
+		$(wrapper).append('<p><div>Pytanie nr '+ x +'&nbsp<span class="glyphicon glyphicon-question-sign"></span><input type="text" maxlength="45" required class="form-control" placeholder="Treść pytania"name="mytext[]" /><a href="#" class="remove_field">Usun</a></div></p>' ); //add input box
 		window.scrollTo(0,document.body.scrollHeight);
 		
 		$('input.form-control').maxlength({
@@ -119,7 +117,7 @@
         }
 		
 		else {
-		max_fields++;
+		
 		alert('Mozna dodac maksymalnie 30 pytan, masz juz '  + liczbaPytanBaza + ' w tej ankiecie');}
     });
 	
@@ -150,22 +148,29 @@
 
 
 <!-- kod html, ktory wyswietlam na stronie -->
-<form action= "PytaniaOtwarteDodaj_action.php" method="POST">
+<form action="PytaniaOtwarteDodaj_action.php" method="POST">
 <div class="input_fields_wrap" id="content">
 	<div class="guziki"	id="fixme">
 		<button style="fixed" id="sidebar" class="btn btn-success add_open fixed">Dodaj więcej pytań</button>  <!-- przycisk oprogramowany w js, aby dodac kolejen pole -->
-		<input name="submit" type="submit" class="btn btn-primary bt " value="Prześlij pytania">  <!--przycisk do wyslania zapytania -->
+		<input name="submit" type="submit" class="btn btn-primary bt" value="Prześlij pytania">  <!--przycisk do wyslania zapytania -->
 	
 	
 	</div>
 	<br></br>
-	<p>Pytanie nr 1 <span class="glyphicon glyphicon-question-sign"></span></p> <input type="text"  maxlength="45" required class="form-control" placeholder="Treść pytania" name="mytexta[]"/></p>
+	<p>Pytanie nr 1 <span class="glyphicon glyphicon-question-sign"></span></p> <input type="text"  maxlength="45" required class="form-control" placeholder="Treść pytania" name="mytext[]"/></p>
 	<script>window.scrollTo(0,document.body.scrollHeight);</script>
 	
 </div>
 
 </form>
+
+
+
 <script>
+
+
+        
+    
 
 $('input.form-control').maxlength({
     alwaysShow: true,

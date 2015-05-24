@@ -88,7 +88,8 @@
 
 	
 <?php
-	//$_SESSION['id'] = 1;
+	session_start();
+	//$_SESSION['id'] = null;
 	//$_SESSION['idAnkiety'] = 10;
 
 	include "funkcje.php";

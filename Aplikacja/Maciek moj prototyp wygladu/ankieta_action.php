@@ -11,66 +11,45 @@
 
 <?php 
 	
-	function filtruj($zmienna)
-{
-    if(get_magic_quotes_gpc())
-        $zmienna = stripslashes($zmienna); // usuwamy slashe
- 
-	// usuwamy spacje, tagi html oraz niebezpieczne znaki
-    return mysql_real_escape_string(htmlspecialchars(trim($zmienna)));
-}
-	header('Content-Type: text/html; charset=utf-8'); 
-
+	include('funkcje.php');
+	
+	//$_SESSION['id'] = 1;
+	//$_SESSION['idAnkiety'] = 10;
+	
+	if ( is_session_started() === FALSE ) session_start();
+	
+	$_SESSION['check'] = 0; //zapobiega wielokrotnemu wyswietlaniu sie komunikatow
 	
 	
-	session_start();
+	if(isset($_POST["tytulAnkiety"]) && isset($_POST["opisAnkiety"] ) && isset($_POST["Anonimowosc"]) && sprawdzPoleczenie() ){
+		$polaczenie = sprawdzPoleczenie();
+		$post = $opisAnkiety = $_POST["opisAnkiety"] ;
+		 $tytulAnkiety = $_POST["tytulAnkiety"] ;
+		$Anonimowosc = $_POST["Anonimowosc"] ;
+		$id = $_SESSION['id'];
 	
-	//$_SESSION['id'] = 1;  uzywane do testowania
-    include "connect.php";
-    
-    $polaczenie = @new mysqli($host, $db_user, $db_password, $db_name); // Ustawienie połączenia z bazą
-    if($polaczenie->connect_errno!=0) // jeśli nie uda się połączyć z bazą
-    {
-        echo "Error: ".$polaczenie->connect_errno;
-    }
-    else
-    {
-		mysql_query('SET NAME utf8');
-		mysql_query("SET CHARACTER SET 'utf8'");
-		if(isset($_SESSION['id'] ) ){
-			if(isset($_POST['submit'])){
-				//wstawiam tytul Ankiety, pobrany ze zmiennej wsylanej metoda POST
-				$_POST["tytulAnkiety"] = htmlentities($_POST["tytulAnkiety"], ENT_QUOTES, "UTF-8");
-				$_POST["tytulAnkiety"] = mysqli_real_escape_string($polaczenie, $_POST["tytulAnkiety"]); 
-				$tytulAnkiety = $_POST["tytulAnkiety"] ;
-				
-				//wstawiam opis Ankiety, pobrany ze zmiennej wsylanej metoda POST
-				$_POST["opisAnkietyy"] = htmlentities($_POST["opisAnkiety"], ENT_QUOTES, "UTF-8");
-				$_POST["opisAnkiety"] = mysqli_real_escape_string($polaczenie, $_POST["opisAnkiety"]); 
-				$opisAnkiety = $_POST["opisAnkiety"] ;
-				
-				$Anonimowosc = $_POST["Anonimowosc"] ;
-				
-				
-					$id = $_SESSION['id'];
-					$sql = "INSERT INTO `Ankiety` (`Tytul`, `Opis`, `Anonimowosc`, `Uzytkownicy_idUsers`) 
-							VALUES ('{$tytulAnkiety}', '{$opisAnkiety}','{$Anonimowosc}','{$id}')";  
-						
-						if (!mysqli_query($polaczenie,$sql)) {
-							die('Error: ' . mysqli_error($polaczenie));
-						}else {
-							echo '<center><div class="alert alert-success" role="alert">Ankieta dodana poprawnie</div><center>';
-							header('Refresh: 2;url=index.php');  //po 2 sekundach przekierowuje nas do strony glownej
-						}
+			
+			
+			
+			$tytulAnkiety = htmlentities($tytulAnkiety, ENT_QUOTES, "UTF-8");
+			$tytulAnkiety = mysqli_real_escape_string($polaczenie, $tytulAnkiety); 
+			
+			$Anonimowosc =  htmlentities($tytulAnkiety, ENT_QUOTES, "UTF-8");
+			$Anonimowosc = mysqli_real_escape_string($polaczenie, $Anonimowosc); 
+			
+			
+			$sql = "INSERT INTO `Ankiety` (`Tytul`, `Opis`, `Anonimowosc`, `Uzytkownicy_idUsers`) 
+								VALUES ('{$tytulAnkiety}', '{$opisAnkiety}','{$Anonimowosc}','{$id}')";  
+								
+			if(wstawDoBazy($sql, $post)){
+				echo '<center><div class="alert alert-success" role="alert">Ankieta dodana poprawnie</div><center>';
+				//header('Refresh: 2;url=index.php');  //po 2 sekundach przekierowuje nas do strony glownej
 			}
-		}else{
-			echo '<center><div class="alert alert-danger" role="alert">Nie jesteś zalogowany</div><center>';
-						header('Refresh: 2;url=index.php');  //po 2 sekundach przekierowuje nas do strony glownej
-		} 
-				
-				
 		
-	}
+	}else {
+		echo '<center><div class="alert alert-danger" role="alert">Nie jesteś zalogowany</div><center>';
+						//header('Refresh: 2;url=index.php');  //po 2 sekundach przekierowuje nas do strony glownej
+					}
 ?>
 
 </html
