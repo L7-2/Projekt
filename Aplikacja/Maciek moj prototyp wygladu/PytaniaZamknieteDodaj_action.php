@@ -25,7 +25,7 @@
 		if(wstawDoBazy($sql, $post)){
 			$query = "SELECT idPytania from pytania 
 								where Tresc = '{$post}' 
-								AND Ankiety_idAnkiety = '{$idAnkiety}' ";
+								AND Ankiety_idAnkiety = '{$idAnkiety}' Limit 1";
 			$RowName = "idPytania";
 			$Pytania_idPytania = odczytaj($query, $RowName);
 			
