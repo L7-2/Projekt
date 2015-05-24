@@ -23,6 +23,8 @@ if(isset($_SESSION['zalogowany'])&&($_SESSION['zalogowany']==true))
 			<a href="index.php">
 			<div class="option">Strona główna</div></a>
 			<div class="option">Kontakt</div>
+                        <a href="wyloguj.php">
+                            <div class="option">Wyloguj się</div></a>
 			<div style="clear:both;"></div>
 			</div>
 		<div id="topbar">
@@ -46,6 +48,8 @@ if(isset($_SESSION['zalogowany'])&&($_SESSION['zalogowany']==true))
 			<div class="optionL" style="color: #000000">Edytuj Dane</div></a>
 			<div class="optionL" style="color: #000000">Zaproszenia</div>
 			<div class="optionL" style="color: #000000">Wiadomości</div>
+                          <a href="usuwanie.php">
+			<div class="optionL" style="color: #000000">Usuń konto</div></a>
 		</div>
 		
 		<div id="content">
@@ -86,6 +90,7 @@ if(isset($_SESSION['zalogowany'])&&($_SESSION['zalogowany']==true))
                    </select>
                    </p>
                  Hasło: <br/> <input type="password" name="haslo"/><br/>
+                 Powtórz hasło: <br/> <input type="password" name="haslo2"/><br/>
                  <input type="submit" value="Zmień dane">   
                  <br/>
                  <?php

@@ -1,5 +1,9 @@
+<html lang="pl">
 <head>
+
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2" />
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
 	</head>
 
 <?php 
@@ -18,6 +22,8 @@
 	
 	session_start();
 	
+	
+	$wrong = 0;  //do poprawnego wyswietlania komunikatu
     include "connect.php";
     
     $polaczenie = @new mysqli($host, $db_user, $db_password, $db_name); // Ustawienie połączenia z bazą
@@ -27,40 +33,44 @@
     }
     else
     {
+		
 		mysql_query('SET NAME utf8');
 		mysql_query("SET CHARACTER SET 'utf8'");
-	
-		$i = 1;  //inicjuje zmienna wartoscia od ktorej zaczynam pytania
-			while(isset($_POST["mytext_{$i}"])){
-				$_POST["mytext_{$i}"] = htmlentities($_POST["mytext_{$i}"], ENT_QUOTES, "UTF-8");
-				$_POST["mytext_{$i}"] = mysqli_real_escape_string($polaczenie, $_POST["mytext_{$i}"]); 
-				$tresc = $_POST["mytext_{$i}"];
-				
-				//echo $tresc;  wyswietlanie tresci pytania
-				
-				
-				$i++;  //inkrementacja zmiennej aby przjesc do kolejnego pytania
-				//ABY DZIALALO MUSIMY ODCZYTAĆ ZMIENNE SESYJNE !!
-				if(isset($_SESSION['id'] ) && isset($_SESSION['idAnkiety'])){
-				//Przypisuje zmienne sesyjne aby skorzystac z nich w zapytaniu SQL i wprowadzic je do bazy
-					$idUzytkownika = $_SESSION['id'] ;
-					$idAnkiety = $_SESSION['idAnkiety'];
+		//ABY DZIALALO MUSIMY ODCZYTAĆ ZMIENNE SESYJNE !!
+		if(isset($_SESSION['id'] ) && isset($_SESSION['idAnkiety'])){
+			//Przypisuje zmienne sesyjne aby skorzystac z nich w zapytaniu SQL i wprowadzic je do bazy
+			//$idUzytkownika = $_SESSION['id'] ;
+			$idAnkiety = $_SESSION['idAnkiety'];
 					
+			$i = 0;  //inicjuje zmienna wartoscia od ktorej zaczynam pytania
+			while(isset($_POST['mytext'][$i])){
+				$_POST['mytext'][$i] = htmlentities($_POST['mytext'][$i], ENT_QUOTES, "UTF-8");
+				$_POST['mytext'][$i] = mysqli_real_escape_string($polaczenie, $_POST['mytext'][$i]); 
+				$tresc = $_POST['mytext'][$i];
+			
+				$i++;  //inkrementacja zmiennej aby przjesc do kolejnego pytania
+				
 					//Wprowadzam dane do bazy
-					$sql = "INSERT INTO `pytania` (`Tresc`, `Ankiety_idAnkiety`, `Ankiety_Uzytkownicy_idUsers`) 
-					VALUES ('{$tresc}', '{$idAnkiety}','{$idUzytkownika}')";   		
+					$sql = "INSERT INTO `pytania` (`Tresc`, `Ankiety_idAnkiety`) 
+					VALUES ('{$tresc}', '{$idAnkiety}')";   		
 
 					if (!mysqli_query($polaczenie,$sql)) {
 						die('Error: ' . mysqli_error($polaczenie));
-						} else {
-									echo "<h1><center>Pytania zostały poprawnie dodane  do ankiety<center><h1>";
-								} 
-					}else {
-							echo "Nie jesteś zalogowany";
-							header('Refresh: 3;url=index.php');  //po 3 sekundach przekierowuje nas do strony glownej
+						} 
+								
+					}
+							
+			}
+			else {
+							$wrong =1;
+							echo '<center><div class="alert alert-danger" role="alert">Nie jesteś zalogowany</div><center>';
+							header('Refresh: 2;url=index.php');  //po 2 sekundach przekierowuje nas do strony glownej
 							break;
 							}
-			}
+							
+			if($wrong == 0)
+			echo '<center><div class="alert alert-success" role="alert">Pytania zostały poprawnie dodane do ankiety</div><center>';
+			header('Refresh: 2;url=index.php');  //po 2 sekundach przekierowuje nas do strony glownej
 	}
 	
 
@@ -70,3 +80,4 @@
         $polaczenie->close();
     
 ?>
+</html>

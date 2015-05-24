@@ -23,10 +23,11 @@ if(isset($_SESSION['zalogowany'])&&($_SESSION['zalogowany']==true))
 		</div>
 		<div id = menu>
 			<a href="index.php">
-			<div class="option">Strona główna</div></a>
+                            <div class="option">Strona główna</div></a>
 			<a href="rejestracja_form.php">
-			<div class="option">Zarejestruj się</div></a>
-			<div class="option">Kontakt</div>
+                            <div class="option">Zarejestruj się</div></a>
+			<a href="kontakt.php">
+                            <div class="option">Kontakt</div></a>
 			<div id = "uzytkownik">
 			<!-- Utworzenie formularza logowania -->
             <form action="logowanie.php" method="post">

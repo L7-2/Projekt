@@ -1,4 +1,12 @@
-     <!-- Bootstrap -->
+     <html lang="pl">
+      <head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	</head>
+	 
+	 <!-- Bootstrap -->
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
         
         <!-- Main Style -->
@@ -46,9 +54,17 @@
 		</style>
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2" />
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	
 </head>
+
+<?php 
+
+	//sprawdzenie czy mamy mniej niz 30 pytan
+	include "funkcje.php";
+	$_SESSION['pytanie'] = 1;
+	sprawdzLiczbePytan(30);
+
+?>
 
 
 <!-- Tutaj dynamicznie tworze pola do dodawania pytan -->
@@ -60,19 +76,22 @@
 	 var wrapper2         = $(".input_fields_wrap2"); //Fields wrapper
     var add_button      = $(".add_open"); //Add button ID
 	 var add_button2      = $(".add_closed"); //Add button ID
-
+	var guziki = $(".guziki");
 	 
 	 var i=67;  //kod asci znaku od ktorego zaczynam numerowac odpowiedzi tutaj 65 = A 
 	 
 
-    var x = 3; //initlal text box count
+    var x = 2; //initlal text box count
+	var scroll = 50;
     $(add_button).click(function(e){ //on add input button click
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
+		
             x++; //text box increment
 			var litera = String.fromCharCode(i);
-		i++;
-		$(wrapper).append('<p><div><input type="text"  class="form-control" placeholder="Odp '+ litera +'" name="odp_1" name="odp_'+ x +'"/><a href="#" class="remove_field">Usun</a></div></p>' ); //add input box
+			i++;
+			
+		$(wrapper).append('<p><div><input type="text"  class="form-control" requiered placeholder="Odp '+ litera +'" name="odp[]"/><a href="#" class="remove_field">Usun</a></div></p>' ); //add input box
 		window.scrollTo(0,document.body.scrollHeight); //scrolluje do dolu strony
         }
 		else alert('Mozna dodac maksymalnie ' + max_fields + ' odpowiedzi');
@@ -81,7 +100,7 @@
 	
     
     $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
-        e.preventDefault(); $(this).parent('div').remove(); x--; i--;
+        e.preventDefault(); $(this).parent('div').remove(); x--; 
 		e.preventDefault(); $(this).parent('p').remove(); 
     }
 	
@@ -91,26 +110,29 @@
 
 
 <!-- kod html, ktory wyswietlam na stronie -->
-<form action="PytaniaZamknieteDodaj_action.php " method="POST">
-<div class="input_fields_wrap">
+
+
+<form action = "PytaniaZamknieteDodaj_action.php" method="POST">
+<div class="input_fields_wrap" id="content">
 	<div class="guziki"	id="fixme">
 		<button style="fixed" id="sidebar" class="btn btn-success add_open fixed">Dodaj więcej odpowiedzi</button>  <!-- przycisk oprogramowany w js, aby dodac kolejen pole -->
-		<input name="submit" type="submit" class="btn btn-primary " value="Przeslij">  <!--przycisk do wyslania zapytania -->
-		<br></br>
+		<input name="submit" type="submit" class="btn btn-primary " value="Prześlij pytania">  <!--przycisk do wyslania zapytania -->
+	
 	</div>
-		<br></br>
-		<div class="form-group has-feedback">
+	<br></br>
+	<div class="form-group has-feedback">
 			<label  class="control-label">Pytanie</label>
 			<input type="text" required class="form-control"  placeholder="Treść pytania" name="trescZamkniete" />
 			<i class="glyphicon glyphicon-question-sign form-control-feedback"></i>
 		</div>
 	
-		<strong>Odpowiedzi: </strong><br><input type="text"  required class="form-control" placeholder="Odp A" name="odp_1"/></p>
-															<input type="text"  required class="form-control" placeholder="Odp B" name="odp_2"/></p>
+		<strong>Odpowiedzi: </strong><br><input type="text"  required class="form-control" placeholder="Odp A" name="odp[]"/></p>
+															<input type="text"  required class="form-control" placeholder="Odp B" name="odp[]"/></p>
 	
 </div>
 
 </form>
+
 
 
 

@@ -1,11 +1,3 @@
-﻿<?php
-session_start();
-if(!isset($_SESSION['zalogowany']))
-{
-	header('Location: index.php');
-	exit();
-}
-?>
 <!DOCTYPE HTML>
 <html lang="pl">
 	<head>
@@ -21,11 +13,7 @@ if(!isset($_SESSION['zalogowany']))
 		<div id = menu>
 			<a href="index.php">
                             <div class="option">Strona główna</div></a>
-                        <a href="kontakt.php">
-                            <div class="option">Kontakt</div></a>
-                        <a href="wyloguj.php">
-                            <div class="option">Wyloguj się</div></a>
-			<div style="clear:both;"></div>
+		<div style="clear:both;"></div>
 			</div>
 		<div id="topbar">
 			<div id="topbarL">
@@ -41,19 +29,11 @@ if(!isset($_SESSION['zalogowany']))
 		</div>
 		
 		<div id="sidebar">
-			<div class="optionL" style="color: #000000">Dodaj Ankietę</div>
-			<div class="optionL" style="color: #000000">Usuń Ankietę</div>
-			<div class="optionL" style="color: #000000">Edytuj Ankietę</div>
-			<a href="edycja_form.php">
-			<div class="optionL" style="color: #000000">Edytuj Dane</div></a>
-			<div class="optionL" style="color: #000000">Zaproszenia</div>
-			<div class="optionL" style="color: #000000">Wiadomości</div>
-                        <a href="usuwanie.php">
-			<div class="optionL" style="color: #000000">Usuń konto</div></a>
+			
 		</div>
 		
 		<div id="content">
-			<span class="bigtitle">Menu</span>
+			<span class="bigtitle">Kontakt</span>
 			
 			<div class="dottedline"></div>
                            <!-- tresc strony -->

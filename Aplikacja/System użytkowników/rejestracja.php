@@ -29,10 +29,10 @@ if (isset($_POST['rejestruj']))
 	// sprawdzamy czy login nie jest już w bazie
 	if (mysql_num_rows(mysql_query("SELECT Login FROM uzytkownicy WHERE Login = '".$login."';")) == 0)
         {
-		if ($haslo1 == $haslo2 && $login != null && $haslo1 != null && $email != null) // sprawdzamy czy hasła takie same
+		if ($haslo1 == $haslo2) // sprawdzamy czy hasła takie same
                     {
                     
-                    if ($imie!=null && $nazwisko!=null && $plec!=null && $data_ur!=null && $wojewodztwo!=null && haslo!=null)
+                    if ($imie!=null && $nazwisko!=null && $plec!=null && $data_ur!=null && $wojewodztwo!=null && $haslo!=null && $login!=null && $email!=null)
                     {
                     mysql_query("INSERT INTO `uzytkownicy` (`Login`, `Haslo`, `Adres_email`, `Data_zalozenia_konta`)
                                                     VALUES ('".$login."', '".($haslo1)."', '".$email."', '".date("Y-m-d")."');");
