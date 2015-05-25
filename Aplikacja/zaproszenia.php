@@ -23,7 +23,6 @@ if(!isset($_SESSION['zalogowany']))
 <body>
 
 <?php
-
  
         $query="SELECT * FROM uzytkownicy";
         $result=mysql_query($query);  // wyswietlanie uzytkowników w liście wyboru:
@@ -43,17 +42,17 @@ if(!isset($_SESSION['zalogowany']))
 									$_SESSION['Adres_email'] = $wiersz['Adres_email'];
 								
                                         echo      '<OPTION VALUE=',$i,'>',$wiersz['Login'], '</OPTION>';
-
 								}
 									
 														
 									echo
-									'<td>Temat:</td>',
-									 ' <td><input type="text" name="Temat"/></td>',
+									' <td><input type="hidden" name=""/></td>',
+									'<td><br />Temat:</td>',
+									 ' <td><input type="text" name="Temat"/><br /></td>',
 									'</tr><tr>';
 									echo									'<tr>
-									  <td>Treść zaproszenia:</td>
-									  <td><textarea name="wiad"></textarea></td>
+									  <td>Treść zaproszenia:<br /></td>
+									  <td><textarea name="wiad"></textarea><br /></td>
 									</tr><tr>';
 										
 										echo '</SELECT>';
@@ -69,11 +68,10 @@ if(!isset($_SESSION['zalogowany']))
 														
 																}
 									   $maile = $_GET['lista'];
-									   $j=0;
+									  
 									   foreach($maile as $id)
 									   {
-										   echo $id;
-										   $j++;
+										  
 										   $query = "SELECT Adres_email FROM uzytkownicy WHERE idUsers =  '".$id."' ;";
 										   $result=mysql_query($query);
 										   if (!$result) { 
@@ -96,8 +94,6 @@ if(!isset($_SESSION['zalogowany']))
 											
 echo '</pre>';
 echo "Aby zaznaczyć kilku użytkowników przytrzymaj CTRL";
-
-
 mysql_free_result($result);
    ?>
 
