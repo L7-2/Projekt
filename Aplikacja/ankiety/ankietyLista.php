@@ -25,9 +25,15 @@ while ($row = $result->fetch_object()) {
     echo '<td>' . $row->Rodzaj_pytania . '</td>';
     echo '<td>' . $row->Anonimowosc . '</td>';
     echo '<td>' . $row->Uzytkownicy_idUsers . '</td>';
+    echo '<td>';
+    echo '<a href="?p=ankietyOdpowiedz&id=' . $row->idAnkiety . '">wypełnij</a> ';
     if ($row->Uzytkownicy_idUsers == $_SESSION['id']) {
-        echo '<td><a href="?p=ankietyEdycja&id=' . $row->idAnkiety . '">edytuj</a> <a href="?p=ankietyUsun&id=' . $row->idAnkiety . '">usuń</a></td>';
+        echo '<a href="?p=ankietyEdycja&id=' . $row->idAnkiety . '">edytuj</a> ';
+        echo '<a href="?p=ankietyUsun&id=' . $row->idAnkiety . '">usuń</a> ';
+        echo '<a href="?p=ankietyWyniki&id=' . $row->idAnkiety . '">wyniki</a> ';
     }
+    echo '</td>';
+    echo '</td>';
     echo '</tr>';
 }
 
