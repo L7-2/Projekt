@@ -1,5 +1,5 @@
 <html lang="pl">
-      <head>
+	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2" />
@@ -9,6 +9,21 @@
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
 
 <?php
+	
+	//tworzy  przycisk submit, ktora zawiera dymek z tytulem ankiety do ktorej dodajemy pytanie
+	function submit(){
+	if ( is_session_started() === FALSE ) session_start();
+	
+	if(isset($_SESSION["idAnkiety"])){
+		$idAnkiety = $_SESSION["idAnkiety"];
+	
+		$sql = "select Tytul from ankiety where idAnkiety = '{$idAnkiety}' limit 1";
+		$tytul = odczytaj($sql, "Tytul");
+		echo '<a href="#" class="tool" tresc="Do ankiety o tytule ',$tytul,'"><input name="submit" type="submit" class="btn btn-primary bt" value="Prześlij pytania"> </a>';
+		}
+		else echo  '<input name="submit" type="submit" class="btn btn-primary bt" value="Prześlij pytania"> ';
+	}
+	
     //zapobiega pokazywanie bledow
 	//ini_set('error_reporting', 0);
 	//ni_set('display_errors', 0);

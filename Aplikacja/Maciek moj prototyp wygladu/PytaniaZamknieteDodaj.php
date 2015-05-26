@@ -51,6 +51,30 @@
 			border-left:1px dashed #000;
 			border-right:1px dashed #000;
 			padding-left:2px; }
+			
+			a.tool::before {
+    content: attr(tresc); /*Odbieranie danych z atrybutu 'tresc'*/
+    font-size: 14px;
+    position: absolute;
+    z-index: 999;
+    white-space: nowrap;
+    bottom: 9999px;
+    left: 50%;
+    background: gray;
+    color: #fff;
+    padding: 4px 5px;
+    opacity: 0; 
+
+    -webkit-border-radius: 3px; 
+    -o-border-radius: 3px;
+    -moz-border-radius: 3px; 
+    border-radius: 3px;
+} 
+
+a.tool:hover::before {
+    opacity: 1;
+    bottom: -25px;
+}
 
 		</style>
 
@@ -130,7 +154,7 @@
 <div class="input_fields_wrap" id="content">
 	<div class="guziki"	id="fixme">
 		<button style="fixed" id="sidebar" class="btn btn-success add_open fixed">Dodaj więcej odpowiedzi</button>  <!-- przycisk oprogramowany w js, aby dodac kolejen pole -->
-		<input name="submit" type="submit" class="btn btn-primary " value="Prześlij pytania">  <!--przycisk do wyslania zapytania -->
+		<?php submit(); ?><!-- przycisk wysylajacy do bazy, z dymkiem o tytule ankiety-->
 	
 	</div>
 	<br></br>

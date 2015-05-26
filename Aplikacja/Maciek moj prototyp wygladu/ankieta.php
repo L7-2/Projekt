@@ -89,7 +89,7 @@
 	
 <?php
 	session_start();
-	//$_SESSION['id'] = null;
+	//$_SESSION['id'] = 1;
 	//$_SESSION['idAnkiety'] = 10;
 
 	include "funkcje.php";
@@ -101,7 +101,7 @@
 ?>
 	
 	<form method="POST" action="ankieta_action.php" >
-		<div class="input_fields_wrap" id="content">
+		<div class="input_fields_wrap form-group" id="content">
 			<div class="guziki"	id="fixme">
 				<input name="submit" type="submit" class="btn btn-primary " value="Akceptuj">  <!--przycisk do wyslania zapytania -->
 			</div>

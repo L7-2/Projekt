@@ -26,6 +26,34 @@
 			border-left:1px dashed #000;
 			border-right:1px dashed #000;
 			padding-left:2px; }
+			
+			a.tool {
+    position: relative;
+} 
+
+a.tool::before {
+    content: attr(tresc); /*Odbieranie danych z atrybutu 'tresc'*/
+    font-size: 14px;
+    position: absolute;
+    z-index: 999;
+    white-space: nowrap;
+    bottom: 9999px;
+    left: 50%;
+    background: gray;
+    color: #fff;
+    padding: 4px 5px;
+    opacity: 0; 
+
+    -webkit-border-radius: 3px; 
+    -o-border-radius: 3px;
+    -moz-border-radius: 3px; 
+    border-radius: 3px;
+} 
+
+a.tool:hover::before {
+    opacity: 1;
+    bottom: -25px;
+}
 
 		</style>
 		
@@ -36,7 +64,7 @@
 
         <!-- Bootstrap -->
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-        
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <!-- Main Style -->
         <link rel="stylesheet" type="text/css" href="assets/css/main.css">
 
@@ -64,7 +92,7 @@
 <?php
 	session_start();
 	//$_SESSION['id'] = 1;
-	//$_SESSION['idAnkiety'] = 10;
+	//$_SESSION['idAnkiety'] = 2;
 	include "funkcje.php";
 	$_SESSION['pytanie'] = 1;  //do poprawnego wyswietlania echa, czy chodzi o ankiete czy pytanie
 	sprawdzLiczbePytan(30);
@@ -149,10 +177,13 @@
 
 <!-- kod html, ktory wyswietlam na stronie -->
 <form action="PytaniaOtwarteDodaj_action.php" method="POST">
-<div class="input_fields_wrap" id="content">
+<div class="input_fields_wrap form-group" id="content">
 	<div class="guziki"	id="fixme">
 		<button style="fixed" id="sidebar" class="btn btn-success add_open fixed">Dodaj więcej pytań</button>  <!-- przycisk oprogramowany w js, aby dodac kolejen pole -->
-		<input name="submit" type="submit" class="btn btn-primary bt" value="Prześlij pytania">  <!--przycisk do wyslania zapytania -->
+		<?php submit(); ?> <!-- przycisk wysylajacy do bazy, z dymkiem o tytule ankiety-->
+		
+		
+		
 	
 	
 	</div>
@@ -161,6 +192,7 @@
 	<script>window.scrollTo(0,document.body.scrollHeight);</script>
 	
 </div>
+
 
 </form>
 
