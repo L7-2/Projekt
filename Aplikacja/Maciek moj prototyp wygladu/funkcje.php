@@ -153,6 +153,7 @@ function odczytaj($sql, $RowName){
 									
 								}else {
 								echo "Cos poszlo nie tak";
+								return null;
 								header('Refresh: 2;url=index.php');  //po 2 sekundach przekierowuje nas do strony glownej
 								exit;
 								}

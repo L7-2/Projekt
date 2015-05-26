@@ -43,8 +43,18 @@
 								
 			if(wstawDoBazy($sql, $post)){
 				echo '<center><div class="alert alert-success" role="alert">Ankieta dodana poprawnie</div><center>';
+				
+				$ostatnnioDodanaAnkieta = "select max(idAnkiety) as ostatniaAnkieta from ankiety where Uzytkownicy_idUsers = '{$id}' Limit 1";
+				if(odczytaj($ostatnnioDodanaAnkieta, "ostatniaAnkieta")){
+				//Jesli wstawimy ankiete poprawnie do bazy, to ustawiam zmienna sesyjna, ktora reprezentuja "aktywna" ankiete na ta ktora wlasnie dodalismy
+					 $_SESSION["idAnkiety"] = odczytaj($ostatnnioDodanaAnkieta, "ostatniaAnkieta");
+					 
+					}
+
 				//header('Refresh: 2;url=index.php');  //po 2 sekundach przekierowuje nas do strony glownej
 			}
+			
+			
 		
 	}else {
 		echo '<center><div class="alert alert-danger" role="alert">Nie jesteś zalogowany</div><center>';
