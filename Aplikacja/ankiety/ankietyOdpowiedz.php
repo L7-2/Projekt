@@ -18,7 +18,7 @@ if (!($result = $mysqli->query($q))) {
 $row = $result->fetch_object();
 
 // Ankieta anonimowa, przekieruj do wypelniania ankiety
-if ($row->Anonimowosc) {
+if ($row->Anonimowosc == "1") {
     header("Location: index.php?p=ankietyWypelnij&id=$id");
     exit;
 }

@@ -1,10 +1,8 @@
 <?php
 
 session_start();
-$_SESSION['idAnkiety'] = 2;
 
 require_once("db.php");
-
 
 echo '<a href="index.php">ankiety</a>';
 if (array_key_exists('login', $_SESSION)) {

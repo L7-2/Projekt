@@ -1,5 +1,7 @@
 <?php
 
+require_once("db.php");
+
 $id = $_GET['id'];
 
 // Sprawdzanie czy id jest napewno liczbą.
@@ -7,14 +9,11 @@ if (!is_numeric($id)) {
     header('Location: index.php');
 }
 
-// Link do eksportu danych do pliku csv
-echo '<a href="ankietyCsv.php?id=' . $id . '"> Eksportuj dane do pliku *.csv </a> <br/>';
+require_once "simpleCsv.php";
+$csv = new simpleCsv();
 
+$csv->saveRow(array("odpowiedzi zamkniete"));
 
-// Pytania zamknięte
-echo '<h3>Odpowiedzi zamkniete:</h3>';
-
-// W tym miejscu komentach jest chyba zbędny ;)
 $q = "
 SELECT pytania.idPytania, pytania.Tresc as pytanie, odp_zamknieta.Tresc as odpowiedz,
 COUNT(odp_zamknieta_has_ankietowany.Ankietowany_idAnkietowany) as odpowiedzi FROM pytania
@@ -26,26 +25,30 @@ GROUP BY odp_zamknieta.idOdp_zamknieta
 
 $odpowiedzi = $mysqli->query($q);
 $idPytania = 0;
-while ($odpowiedz = $odpowiedzi->fetch_object()){
+while ($odpowiedz = $odpowiedzi->fetch_object()) {
     if ($idPytania != $odpowiedz->idPytania) {
         $idPytania = $odpowiedz->idPytania;
-        echo '<br/><h4>' . $odpowiedz->pytanie . '</h4><br/>';
+        $csv->saveRow(array($odpowiedz->pytanie));
     }
-    echo '<b>' . $odpowiedz->odpowiedzi . 'x:</b> ' . $odpowiedz->odpowiedz . '<br/>';
+    $csv->saveRow(array($odpowiedz->odpowiedzi, $odpowiedz->odpowiedz));
 }
 
-// Pytania otwarte
-echo '<hr/><h3>Odpowiedzi otwarte:</h3>';
+
+$csv->saveRow(array(""));
+$csv->saveRow(array("odpowiedzi otwarte"));
 
 $q = "SELECT pytania.idPytania, pytania.Tresc as pytanie, odp_otwarta.Tresc as odpowiedz FROM pytania
 INNER JOIN odp_otwarta ON odp_otwarta.Pytania_idPytania = pytania.idPytania WHERE pytania.Ankiety_idAnkiety = $id";
 
 $odpowiedzi = $mysqli->query($q);
 $idPytania = 0;
-while ($odpowiedz = $odpowiedzi->fetch_object()){
+while ($odpowiedz = $odpowiedzi->fetch_object()) {
     if ($idPytania != $odpowiedz->idPytania) {
         $idPytania = $odpowiedz->idPytania;
-        echo '<br/><h4>' . $odpowiedz->pytanie . '</h4><br/>';
+        $csv->saveRow(array($odpowiedz->pytanie));
     }
-    echo $odpowiedz->odpowiedz . '<br/>';
+    $csv->saveRow(array("", $odpowiedz->odpowiedz));
 }
+
+
+

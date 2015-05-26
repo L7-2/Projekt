@@ -18,11 +18,16 @@ if (!($result = $mysqli->query($q))) {
 $row = $result->fetch_object();
 
 // Sprawdzanie czy ankietowany podał imię i nazwisko
-if ($row->Anonimowosc && !array_key_exists('idAnkietowanego', $_SESSION)) {
+if ($row->Anonimowosc == "0" && !array_key_exists('idAnkietowanego', $_SESSION)) {
     header("Location: index.php?p=ankietyOdpowiedz&id=$id");
 }
 
-$idAnkietowanego = $_SESSION['idAnkietowanego'];
+if (array_key_exists('idAnkietowanego', $_SESSION)) {
+    $idAnkietowanego = $_SESSION['idAnkietowanego'];
+} else {
+    $idAnkietowanego = 0;
+}
+
 
 // Pobieranie danych z bazy
 $q = "SELECT * FROM pytania WHERE Ankiety_idAnkiety=$id";

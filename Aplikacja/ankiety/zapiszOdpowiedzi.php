@@ -15,6 +15,7 @@ if(empty($_POST)) {
 // Zapisanie id ankietowanego do zmiennej, jeżeli to była ankieta anonimowa to 0
 if (array_key_exists('idAnkietowanego', $_SESSION)) {
     $idAnkietowanego = $_SESSION['idAnkietowanego'];
+    unset($_SESSION['idAnkietowanego']);
 } else {
     $idAnkietowanego = 0;
 }
