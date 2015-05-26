@@ -57,8 +57,8 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Ankiety` (
   CONSTRAINT `fk_Ankiety_Uzytkownicy`
     FOREIGN KEY (`Uzytkownicy_idUsers`)
     REFERENCES `mydb`.`Uzytkownicy` (`idUsers`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -91,13 +91,13 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Zaproszenia` (
   CONSTRAINT `fk_Zaproszenia_Ankiety1`
     FOREIGN KEY (`Ankiety_idAnkiety`)
     REFERENCES `mydb`.`Ankiety` (`idAnkiety`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Zaproszenia_Ankietowany1`
     FOREIGN KEY (`Ankietowany_idAnkietowany`)
     REFERENCES `mydb`.`Ankietowany` (`idAnkietowany`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -117,8 +117,8 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Wiadomosci` (
   CONSTRAINT `fk_Wiadomosci_Uzytkownicy1`
     FOREIGN KEY (`Uzytkownicy_idUsers`)
     REFERENCES `mydb`.`Uzytkownicy` (`idUsers`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -134,8 +134,8 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Pytania` (
   CONSTRAINT `fk_Pytania_Ankiety1`
     FOREIGN KEY (`Ankiety_idAnkiety`)
     REFERENCES `mydb`.`Ankiety` (`idAnkiety`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -151,8 +151,8 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Odp_otwarta` (
   CONSTRAINT `fk_Odp_otwarta_Pytania1`
     FOREIGN KEY (`Pytania_idPytania`)
     REFERENCES `mydb`.`Pytania` (`idPytania`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -168,8 +168,8 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Odp_zamknieta` (
   CONSTRAINT `fk_Odp_zamknieta_Pytania1`
     FOREIGN KEY (`Pytania_idPytania`)
     REFERENCES `mydb`.`Pytania` (`idPytania`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -184,8 +184,8 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Wypelnione_ankiety` (
   CONSTRAINT `fk_Wypelnione_ankiety_Ankietowany1`
     FOREIGN KEY (`Ankietowany_idAnkietowany`)
     REFERENCES `mydb`.`Ankietowany` (`idAnkietowany`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -200,13 +200,13 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Odp_zamknieta_has_Ankietowany` (
   CONSTRAINT `fk_Odp_zamknieta_has_Ankietowany_Ankietowany1`
     FOREIGN KEY (`Ankietowany_idAnkietowany`)
     REFERENCES `mydb`.`Ankietowany` (`idAnkietowany`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Odp_zamknieta_has_Ankietowany_Odp_zamknieta1`
     FOREIGN KEY (`Odp_zamknieta_idOdp_zamknieta`)
     REFERENCES `mydb`.`Odp_zamknieta` (`idOdp_zamknieta`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
