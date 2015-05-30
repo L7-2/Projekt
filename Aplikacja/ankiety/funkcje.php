@@ -143,15 +143,16 @@ function wstawDoBazy($sql, $post){
 			}elseif($_SESSION['check']  == 0) {
 				echo '<center><div class="alert alert-success" role="alert">Wszystko ok</div><center>';
 				$_SESSION['check']  = 1;
+				header('Refresh: 2;url=index.php');  //po 2 sekundach przekierowuje nas do strony glownej
 				return 1;
-				//header('Refresh: 2;url=index.php');  //po 2 sekundach przekierowuje nas do strony glownej
+				
 				
 				
 				}
 					
 		}else{
 				echo '<center><div class="alert alert-danger" role="alert">Nie jesteś zalogowany</div><center>';
-				//header('Refresh: 2;url=index.php');  //po 2 sekundach przekierowuje nas do strony glownej
+				header('Refresh: 2;url=index.php');  //po 2 sekundach przekierowuje nas do strony glownej
 				return null;
 				exit;
 				} 

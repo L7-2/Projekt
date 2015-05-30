@@ -31,8 +31,8 @@ while ($row = $result->fetch_object()) {
         echo '<a href="?p=ankietyEdycja&id=' . $row->idAnkiety . '">edytuj</a> ';
         echo '<a href="?p=ankietyUsun&id=' . $row->idAnkiety . '">usuń</a> ';
         echo '<a href="?p=ankietyWyniki&id=' . $row->idAnkiety . '">wyniki</a> ';
-		echo  '<a href=Maciek/PytaniaOtwarteDodaj.php>Doda pytanie Otwarte</a> ';
-		echo  '<a href=Maciek/PytaniaZamknieteDodaj.php>Doda pytanie Zamknięte</a> ';
+		echo '<a href="?p=PytaniaOtwarteDodaj&id=' . $row->idAnkiety . '">Doda pytanie otwarte</a> ';
+		echo '<a href="?p=PytaniaZamknieteDodaj&id=' . $row->idAnkiety . '">Doda pytanie zamkniete</a> ';
     }
     echo '</td>';
     echo '</td>';
@@ -41,4 +41,4 @@ while ($row = $result->fetch_object()) {
 
 echo '<tbody>';
 echo '</table>';
-echo  '<a href=Maciek/ankieta.php>Dodaj ankiete</a> ';
+echo  '<a href=ankieta.php>Dodaj ankiete</a> ';

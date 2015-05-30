@@ -88,11 +88,13 @@
 
 	
 <?php
-	session_start();
+include "funkcje.php";
+if ( is_session_started() === FALSE ) session_start();
+
 	//$_SESSION['id'] = 1;
 	//$_SESSION['idAnkiety'] = 10;
 
-	include "funkcje.php";
+	
 
 	$_SESSION['pytanie'] = 0;
 	

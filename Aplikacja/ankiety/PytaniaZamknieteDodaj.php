@@ -83,11 +83,13 @@ a.tool:hover::before {
 </head>
 
 <?php 
-	session_start();
-	//$_SESSION['id'] = null;
-	//$_SESSION['idAnkiety'] = 10;
-	//sprawdzenie czy mamy mniej niz 30 pytan
 	include "funkcje.php";
+	
+	if ( is_session_started() === FALSE ) session_start();
+	//$_SESSION['id'] = null;
+	$_SESSION['idAnkiety'] = $_GET['id'];
+	//sprawdzenie czy mamy mniej niz 30 pytan
+	
 	$_SESSION['pytanie'] = 1;
 	sprawdzLiczbePytan(30);
 

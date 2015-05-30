@@ -7,12 +7,13 @@
 </head>
 
 <?php 
-	
-	session_start();
-	
-	$_SESSION['id'] = 1;
-	$_SESSION['idAnkiety'] = 10;
 	include('funkcje.php');
+	
+	if ( is_session_started() === FALSE ) session_start();
+	
+	//$_SESSION['id'] = 1;
+	//$_SESSION['idAnkiety'] = 10;
+	
 	
 	$_SESSION['check'] = 0;
 	

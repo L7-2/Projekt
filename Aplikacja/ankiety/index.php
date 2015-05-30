@@ -22,6 +22,13 @@ switch($subPage) {
     case 'ankietyEdycja':
         include "ankietyEdycja.php";
         break;
+		 case 'PytaniaOtwarteDodaj':
+        include "PytaniaOtwarteDodaj.php";
+        break;
+		case 'PytaniaZamknieteDodaj':
+        include "PytaniaZamknieteDodaj.php";
+        break;
+		
     case 'ankietyUsun':
         include "ankietyUsun.php";
         break;

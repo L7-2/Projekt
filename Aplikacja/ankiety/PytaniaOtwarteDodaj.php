@@ -90,10 +90,13 @@ a.tool:hover::before {
 		
 		
 <?php
-	session_start();
+include "funkcje.php";
+
+	if ( is_session_started() === FALSE ) session_start();
+	
 	//$_SESSION['id'] = 1;
-	//$_SESSION['idAnkiety'] = 2;
-	include "funkcje.php";
+	$_SESSION['idAnkiety'] =  $_GET['id'];;
+	
 	$_SESSION['pytanie'] = 1;  //do poprawnego wyswietlania echa, czy chodzi o ankiete czy pytanie
 	sprawdzLiczbePytan(30);
 	

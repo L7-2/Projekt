@@ -51,14 +51,15 @@
 					 
 					}
 
-				//header('Refresh: 2;url=index.php');  //po 2 sekundach przekierowuje nas do strony glownej
+				header('Refresh: 2;url=index.php');  //po 2 sekundach przekierowuje nas do strony glownej
+				
 			}
 			
 			
 		
 	}else {
 		echo '<center><div class="alert alert-danger" role="alert">Nie jesteś zalogowany</div><center>';
-						//header('Refresh: 2;url=index.php');  //po 2 sekundach przekierowuje nas do strony glownej
+						header('Refresh: 2;url=index.php');  //po 2 sekundach przekierowuje nas do strony glownej
 					}
 ?>
 
