@@ -1,0 +1,149 @@
+diff a/Aplikacja/System użytkowników/logowanie.php b/Aplikacja/System użytkowników/logowanie.php	(rejected hunks)
+@@ -1,80 +1,68 @@
+ ﻿<?php
+-session_start();
+-
+-
+-if((!isset($_POST['login']))||(!isset($_POST['haslo'])))
+-{
+-	header('Location: index.php');
+-	exit();
+-}
+-    include "connect.php";
+-    
+-    $polaczenie = @new mysqli($host, $db_user, $db_password, $db_name); // Ustawienie połączenia z bazą
+-    if($polaczenie->connect_errno!=0) // jeśli nie uda się połączyć z bazą
+-    {
+-        echo "Error: ".$polaczenie->connect_errno;
+-    }
+-    else
+-    {
+-        $login = $_POST['login'];
+-        $haslo = $_POST['haslo'];
+-        
+-        $login =  htmlentities($login, ENT_QUOTES, "UTF-8"); // zabezpieczenia
+-        $haslo =  htmlentities($haslo, ENT_QUOTES, "UTF-8"); // zabezpieczenia
+-        
+-        if($wynikpolaczania = @$polaczenie->query(
+-                sprintf("SELECT * FROM uzytkownicy WHERE Login='%s' AND Haslo='%s' AND Zablokowany!='1'",
+-                mysqli_real_escape_string($polaczenie, $login),
+-                mysqli_real_escape_string($polaczenie, $haslo)))) // sprawdzenie czy zapytanie jest dobrze zapisane
+-        {
+-            $uzytkownicy = $wynikpolaczania->num_rows; // zwrocenie ile uzytkownikow ma podany login i haslo
+-            if($uzytkownicy>0) // jezeli udalo sie zalogowac i login i haslo znajduje sie w bazie danych
+-            {
+-                $_SESSION['zalogowany']=true;   
+-                $wiersz = $wynikpolaczania->fetch_assoc();
+-                $_SESSION['id']=$wiersz['idUsers'];
+-                $_SESSION['login'] = $wiersz['Login']; // pobrania wartosci z kolumny login		
+-                unset($_SESSION['blad']);
+-                unset($_SESSION['zablokowany']);
+-                $wynikpolaczania->free_result();
+-                header('Location: menu.php');
+-            }else{
+-                if($wynikpolaczania = @$polaczenie->query(
+-                sprintf("SELECT * FROM uzytkownicy WHERE Login='%s' AND Haslo='%s' AND Zablokowany='1'",
+-                mysqli_real_escape_string($polaczenie, $login),
+-                mysqli_real_escape_string($polaczenie, $haslo)))) // sprawdzenie czy zapytanie jest dobrze zapisane
+-                {
+-                $uzytkownicy = $wynikpolaczania->num_rows; // zwrocenie ile uzytkownikow ma podany login i haslo
+-                if($uzytkownicy>0) // jezeli udalo sie zalogowac i login i haslo znajduje sie w bazie danych
+-                 {
+-                    unset($_SESSION['blad']);
+-                    $_SESSION['zablokowany']='<span style="color:red">Twoje konto jest zablokowane!</span>';
+-                    header('Location: index.php');
+-                 }
+-                else
+-                {
+-                unset($_SESSION['zablokowany']);
+-                $_SESSION['blad']='<span style="color:red">Nieprawidłowy login lub hasło!</span>';
+-		header('Location: index.php');
+-                }
++include 'config.php';
++db_connect();
++ 
++// sprawdzamy czy user nie jest przypadkiem zalogowany
++if(!$_SESSION['logged']) {
++    // jeśli zostanie naciśnięty przycisk "Zarejestruj"
++    if(isset($_POST['name'])) {
++        // filtrujemy dane...
++        $_POST['name'] = clear($_POST['name']);
++        $_POST['password'] = clear($_POST['password']);
++        $_POST['password2'] = clear($_POST['password2']);
++        $_POST['email'] = clear($_POST['email']);
++ 
++        // sprawdzamy czy wszystkie pola zostały wypełnione
++        if(empty($_POST['name']) || empty($_POST['password']) || empty($_POST['password2']) || empty($_POST['email'])) {
++            echo '<p>Musisz wypełnić wszystkie pola.</p>';
++        // sprawdzamy czy podane dwa hasła są takie same
++        } elseif($_POST['password'] != $_POST['password2']) {
++            echo '<p>Podane hasła różnią się od siebie.</p>';
++        // sprawdzamy poprawność emaila
++        } elseif(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) === false) {
++            echo '<p>Podany email jest nieprawidłowy.</p>';
++        } else {
++            // sprawdzamy czy są jacyś uzytkownicy z takim loginem lub adresem email
++            $result = mysql_query("SELECT Count(user_id) FROM `users` WHERE `user_name` = '{$_POST['name']}' OR `user_email` = '{$_POST['email']}'");
++            $row = mysql_fetch_row($result);
++            if($row[0] > 0) {
++                echo '<p>Już istnieje użytkownik z takim loginem lub adresem e-mail.</p>';
++            } else {
++                // jeśli nie istnieje to kodujemy haslo...
++                $_POST['password'] = codepass($_POST['password']);
++                // i wykonujemy zapytanie na dodanie usera
++                mysql_query("INSERT INTO `users` (`user_name`, `user_password`, `user_email`, `user_regdate`) VALUES ('{$_POST['name']}', '{$_POST['password']}', '{$_POST['email']}', '".time()."')");
++                echo '<p>Zostałeś poprawnie zarejestrowany! Możesz się teraz <a href="login.php">zalogować</a>.</p>';
+             }
+         }
+-        }
+-        $polaczenie->close();
+-    }   
+-?>
+-
+- <!--
+-            
+-                  $_SESSION['zalogowany']=true;
+-		  if($wynikpolaczania = @$polaczenie->query(
+-                sprintf("SELECT * FROM uzytkownicy WHERE Login='%s' AND Haslo='%s' AND Zablokowany='1'",
+-                mysqli_real_escape_string($polaczenie, $login),
+-                mysqli_real_escape_string($polaczenie, $haslo))))
+-                    {
+-                   $_SESSION['zablokowany']='<span style="color:red">Twoje konto jest zablokowane huehue!</span>';
+-                   header('Location: index.php');
+-                      exit();                        
+-                    }  
+-                
+-                -->
+\ No newline at end of file
++    }
++ 
++    // wyświetlamy formularz
++    echo '<form method="post" action="register.php">
++        <p>
++            Login:<br>
++            <input type="text" value="'.$_POST['name'].'" name="name">
++        </p>
++        <p>
++            Hasło:<br>
++            <input type="password" value="'.$_POST['password'].'" name="password">
++        </p>
++        <p>
++            Powtórz hasło:<br>
++            <input type="password" value="'.$_POST['password2'].'" name="password2">
++        </p>
++        <p>
++            E-mail:<br>
++            <input type="text" value="'.$_POST['email'].'" name="email">
++        </p>
++        <p>
++            <input type="submit" value="Zarejestruj">
++        </p>
++    </form>';
++} else {
++    echo '<p>Jesteś już zalogowany, więc nie możesz stworzyć nowego konta.</p>
++        <p>[<a href="index.php">Powrót</a>]</p>';
++}
++ 
++db_close();
++?>
+\ No newline at end of file
