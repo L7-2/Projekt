@@ -39,7 +39,9 @@ if (!isset($_SESSION['zalogowany'])) {
                 <div class="optionL" style="color: #000000">Dodaj ankietę</div>
                  <div class="optionL" style="color: #000000">Edytuj ankietę</div>
                   <div class="optionL" style="color: #000000">Usuń ankietę</div>
-                 <div class="optionL" style="color: #000000">Zaproszenia</div>
+				   <a href="zaproszenia.php">
+                 <div class="optionL" style="color: #000000">Zaproszenia</div><a/>
+				
                 <div class="optionL" style="color: #000000">Wiadomości</div>
                 <a href="edycja_form.php">
                  <div class="optionL" style="color: #000000">Edytuj dane</div></a>
