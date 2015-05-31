@@ -63,13 +63,12 @@ if(!isset($_SESSION['zalogowany']))
                                ' </form>',
                                        ' <pre>';
 									   mysql_free_result($result);
-									   $go = $_GET['go'];
-													if (isset($go)) { 
+													if (isset($_GET['go'])) { 
 			
 														$temat = $_GET['Temat'];
 														$wiad = $_GET['wiad'];
 														
-																}
+																
 									   $maile = $_GET['lista'];
 									  
 									   foreach($maile as $id)
@@ -92,9 +91,9 @@ if(!isset($_SESSION['zalogowany']))
 															
 												}}
 									   }	
-											
-													
-											
+									  
+											}
+																					
 echo '</pre>';
 echo "Aby zaznaczyć kilku użytkowników przytrzymaj CTRL";
 echo '<div id = "footer">';
@@ -106,7 +105,7 @@ echo  '<a href="menu.php">';
 			  
             
 
-mysql_free_result($result);
+
    ?>
 
  

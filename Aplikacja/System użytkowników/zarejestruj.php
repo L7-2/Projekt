@@ -162,7 +162,7 @@
 	  <input type="submit"   class="btn btn-success" value="Rejestruj" name="rejestruj">
 	  <br></br>
 	    
-        <a href="index.php" class="btn btn-success" >Powrot</a>
+        <a href="../ankiety/index.php" class="btn btn-success" >Powrot</a>
       </div>
     </div>
   </fieldset>
@@ -191,10 +191,10 @@ if (isset($_POST['rejestruj']))
 	$email = filtruj($_POST['email']);
 	$ip = filtruj($_SERVER['REMOTE_ADDR']);
  
-	// sprawdzamy czy login nie jest ju¿ w bazie
+	// sprawdzamy czy login nie jest juï¿½ w bazie
 	if (mysql_num_rows(mysql_query("SELECT login FROM uzytkownicy WHERE login = '".$login."';")) == 0)
 	{
-		if ($haslo1 == $haslo2) // sprawdzamy czy has³a takie same
+		if ($haslo1 == $haslo2) // sprawdzamy czy hasï¿½a takie same
 		{
 			mysql_query("INSERT INTO `uzytkownicy` (`Login`, `Haslo`, `Adres_email`, `Data_zalozenia_konta`)
 				VALUES ('".$login."', '".($haslo1)."', '".$email."', '".date("Y-m-d")."');");
@@ -202,7 +202,7 @@ if (isset($_POST['rejestruj']))
  
 			echo "Konto zostalo utworzone!";
 		}
-		else echo "Hasla nie s¹ takie same";
+		else echo "Hasla nie sï¿½ takie same";
 	}
 	else echo "Podany login jest juz zajety.";
 }
