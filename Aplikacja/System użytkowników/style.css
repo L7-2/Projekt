@@ -78,7 +78,29 @@ body
     min-height: 580px;
     text-align: justify;
 }
+#content2
+{
+    float: left;
+    padding: 20px;
+    width: 770px;
+    background-color: #dedede;
+    min-height: 580px;
+    text-align: justify;
+}
 
+#polee
+{
+    float: left;
+    
+}
+#tabela
+{
+    float: left;
+	background-color: #dedede;
+	width: 680px;
+	margin-bottom:10px;
+    
+}
 #footer
 {
     clear: both;
@@ -102,7 +124,8 @@ body
    position: absolute;
    left: 30%;
 }
-
+td { font-size: 10;  }
+th { font-size: 10;  }
 .option
 {
     float: left;

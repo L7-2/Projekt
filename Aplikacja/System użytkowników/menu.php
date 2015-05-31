@@ -1,9 +1,24 @@
 ﻿<?php
+include "connect.php";
 session_start();
 if (!isset($_SESSION['zalogowany'])) {
     header('Location: index.php');
     exit();
 }
+
+$log = $_SESSION['login'];
+$link = mysql_connect("$host", "$db_user", "$db_password");
+			mysql_select_db("$db_name");
+			if (!$link) {
+			die('Could not connect: ' . mysql_error());
+			}
+			$zapytanie = mysql_query("Select administrator From uzytkownicy where login='$log'");
+			if(mysql_num_rows($zapytanie)){
+			$row = mysql_fetch_row($zapytanie);
+			foreach ($row as $value) {
+            $admin=$value;
+			}
+        }
 ?>
 <!DOCTYPE HTML>
 <html lang="pl">
@@ -47,6 +62,13 @@ if (!isset($_SESSION['zalogowany'])) {
                  <div class="optionL" style="color: #000000">Edytuj dane</div></a>
                   <a href="usuwanie.php">
                     <div class="optionL" style="color: #000000">Usuń konto</div></a>
+					<?php
+			if($admin==1){
+				echo '<a href="administracja.php">';
+                   		echo '<div class="optionL" style="color: #000000">Administracja</div></a>';
+			}
+			
+		?>
             </div>
             <div id="content">
                 <span class="bigtitle2">Menu</span>
