@@ -182,7 +182,7 @@ include "funkcje.php";
 <form action="PytaniaOtwarteDodaj_action.php" method="POST">
 <div class="input_fields_wrap form-group" id="content">
 	<div class="guziki"	id="fixme">
-		<button style="fixed" id="sidebar" class="btn btn-success add_open fixed">Dodaj więcej pytań</button>  <!-- przycisk oprogramowany w js, aby dodac kolejen pole -->
+		<button style="fixed"  class="btn btn-success add_open fixed">Dodaj więcej pytań</button>  <!-- przycisk oprogramowany w js, aby dodac kolejen pole -->
 		<?php submit(); ?> <!-- przycisk wysylajacy do bazy, z dymkiem o tytule ankiety-->
 		
 		

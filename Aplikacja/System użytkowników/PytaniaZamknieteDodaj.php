@@ -155,7 +155,7 @@ a.tool:hover::before {
 <form action = "PytaniaZamknieteDodaj_action.php" method="POST">
 <div class="input_fields_wrap" id="content">
 	<div class="guziki"	id="fixme">
-		<button style="fixed" id="sidebar" class="btn btn-success add_open fixed">Dodaj więcej odpowiedzi</button>  <!-- przycisk oprogramowany w js, aby dodac kolejen pole -->
+		<button style="fixed" class="btn btn-success add_open fixed">Dodaj więcej odpowiedzi</button>  <!-- przycisk oprogramowany w js, aby dodac kolejen pole -->
 		<?php submit(); ?><!-- przycisk wysylajacy do bazy, z dymkiem o tytule ankiety-->
 	
 	</div>
