@@ -27,7 +27,6 @@ if ($row->Uzytkownicy_idUsers != $_SESSION['id']) {
 if ($_POST) {
     $tytul = $_POST['tytul'];
     $opis = $_POST['opis'];
-    $rozdaj = $_POST['rozdaj'];
     $anonimowosc = $_POST['anonimowosc'];
 
     // Aktualizacja danych w bazie
@@ -42,7 +41,6 @@ echo '<form acrion="" method="POST">';
 echo 'id: ' . $row->idAnkiety . ' <br/>';
 echo 'tytuł: <input type="text" name="tytul" value="' . $row->Tytul . '" maxlength="45" /> <br/>';
 echo 'opis: <input type="text" name="opis" value="' . $row->Opis . '" maxlength="45" /> <br/>';
-echo 'rozdaj pytania: <input type="text" name="rozdaj" value="' . $row->Rodzaj_pytania . '" maxlength="45" /> <br/>';
 echo 'anonimowosc: ';
 echo '<select name="anonimowosc">';
 echo '<option value="0" ' . ($row->Anonimowosc == 0 ? 'selected="selected"' : '') . ' >nie</option>';
