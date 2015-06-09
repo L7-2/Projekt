@@ -31,15 +31,19 @@
                 <div style="clear:both;"></div>
             </div>
             <div id="sidebar">
-                <div class="optionL" style="color: #000000">Dodaj ankietę</div>
-                 <div class="optionL" style="color: #000000">Edytuj ankietę</div>
-                  <div class="optionL" style="color: #000000">Usuń ankietę</div>
-                 <div class="optionL" style="color: #000000">Zaproszenia</div>
-                <div class="optionL" style="color: #000000">Wiadomości</div>
-                <a href="edycja_form.php">
-                 <div class="optionL" style="color: #000000">Edytuj dane</div></a>
-                  <a href="usuwanie.php">
-                    <div class="optionL" style="color: #000000">Usuń konto</div></a>
+                <a href="menu.php?p=ankietyLista"><div class="optionL" style="color: #000000">Ankiety</div></a>
+        <a href="ankieta.php"><div class="optionL" style="color: #000000">dodaj ankietę</div></a>
+        <a href="zaproszenia.php">
+            <div class="optionL" style="color: #000000">Zaproszenia</div>
+            <a/>
+
+            <div class="optionL" style="color: #000000">Wiadomości</div>
+            <a href="edycja_form.php">
+                <div class="optionL" style="color: #000000">Edytuj dane</div>
+            </a>
+            <a href="usuwanie.php">
+                <div class="optionL" style="color: #000000">Usuń konto</div>
+            </a>
 					:admin:
             </div>
             <div id="content2">
@@ -83,8 +87,8 @@
                           <p>Płeć:</p>
            <select name="plec">
             <option value="">wszystkie</option>
-             <option value="M">Mężczyzna</option>
-            <option value="K">Kobieta</option>
+             <option value="1">Mężczyzna</option>
+            <option value="0">Kobieta</option>
             </select>
                       </div>
           
@@ -124,6 +128,7 @@
                           <li>
                               <input type="submit" value="Edytuj" name="Edytuj"/>
                               <input type="submit" value="Usuń" name="Usun"/>
+							  <input type="submit" value="Blokuj/Odblokuj" name="Blokuj"/>
                           </li>
                       </ul>
                   </div>

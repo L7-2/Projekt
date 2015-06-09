@@ -3,6 +3,7 @@
 require_once 'mail.php';
 include "connect.php";
 function select(&$zap) {
+	include "connect.php";
     $link = mysql_connect("$host", "$db_user", "$db_password");
 			mysql_select_db("$db_name");
     if (!$link) {
@@ -14,7 +15,7 @@ function select(&$zap) {
     $tabela='<table border="1">';
     $tabela=$tabela.'<tr><th>ID</th><th>Login</th><th>Hasło</th><th>Imie</th><th>Nazwisko</th><th>Płeć</th>'
     . '<th>Data urodzenia</th><th>Województwo</th><th>Adres eMail</th><th>Data zał. konta</th><th>Wyp. ankiety</th><th>Zam. ankiety</th>'
-    . '<th>Admin</th><th>Ankietowany</th><th>Ankietujący</th><th>Zab.</th></tr>';
+    . '<th>Admin</th><th>Zab.</th></tr>';
     while ($row = mysql_fetch_row($result)) {
         $tabela=$tabela. '<tr>';
         foreach ($row as $value) {
@@ -98,6 +99,19 @@ if (isset($_REQUEST['Edytuj'])) {
 if (isset($_REQUEST['Usun'])) { 
     $id = $_POST['id'];
     mysql_query("DELETE FROM uzytkownicy WHERE idUsers='$id'") ;
+}
+if (isset($_REQUEST['Blokuj'])) { 
+	
+    $id = $_POST['id'];
+	$zapytanie = mysql_query("Select Zablokowany From uzytkownicy where idUsers='$id'");
+	if(mysql_num_rows($zapytanie)){
+    $row = mysql_fetch_row($zapytanie);
+    foreach ($row as $value) {
+            $zap=$value;
+        }
+	}
+    if($zap) mysql_query("UPDATE uzytkownicy SET Zablokowany = 0 WHERE idUsers='$id'");
+	else mysql_query("UPDATE uzytkownicy SET Zablokowany = 1 WHERE idUsers='$id'");
 }
 if (isset($_REQUEST['Wyswietl'])) { //2
     $plec = $_POST['plec'];

@@ -26,11 +26,11 @@ var CellWidth = 18;
 
 var CellHeight = 16;
 
-var ImageURL = '/obrazki/calendar.jpg';
+var ImageURL = 'obrazki/calendar.jpg';
 
-var NextURL = '/obrazki/calendar.jpg';
+var NextURL = 'obrazki/calendar.jpg';
 
-var PrevURL = '/obrazki/calendar.jpg';
+var PrevURL = 'obrazki/calendar.jpg';
 
 var CalBGColor = 'white';
 
